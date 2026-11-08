@@ -1,0 +1,10 @@
+{
+  "name": "nicolabz-design-system",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "node scripts/build-tokens.js",
+    "check": "node scripts/build-tokens.js --check",
+    "test": "node --test"
+  }
+}

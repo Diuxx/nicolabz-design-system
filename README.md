@@ -1,41 +1,98 @@
-# nicolabz UI — thème clair/sombre
+# Nicolabz Design System
 
-Prototype HTML/CSS/JS sans framework ni dépendances externes.
+Base HTML/CSS/JavaScript sans framework ni dépendances externes, avec une
+démonstration autonome. La direction visuelle est décrite dans [DESIGN.md](DESIGN.md).
 
 ## Démarrer
 
-Ouvrir `index.html` dans le navigateur, ou servir le dossier avec `python -m http.server 8080`.
+Ouvrir [demo/index.html](demo/index.html) directement dans un navigateur. Aucun
+serveur applicatif ni installation npm n'est nécessaire pour la démonstration.
+Node.js 18 ou plus récent est nécessaire pour la génération et les tests.
 
-## Organisation
+## Architecture
 
-- `palette.json` : palette source **documentaire** des deux thèmes, indépendante de toute application.
-- `css/theme.css` : tokens CSS sémantiques utilisés à l'exécution.
-- `css/components.css` : mise en page et composants de cette démo uniquement.
-- `js/theme.js` : thème actif, préférence système, bouton et stockage local.
+- [tokens/palette.json](tokens/palette.json) : source de vérité des couleurs,
+  rayons et espacements des deux thèmes.
+- [scripts/build-tokens.js](scripts/build-tokens.js) : validation et génération.
+- [src/styles/theme.css](src/styles/theme.css) : **fichier généré**, à ne jamais
+  modifier manuellement. Il contient les variables et les propriétés de rendu
+  propres aux thèmes, dont l'opacité et le flou de la forme décorative.
+- [src/styles/typography.css](src/styles/typography.css) : styles de base,
+  focus et réduction des animations.
+- [src/styles/components.css](src/styles/components.css) : composants CSS
+  réutilisables.
+- [src/theme.js](src/theme.js) : gestion du thème indépendante de la démo.
+- [demo/](demo/) : page, présentation spécifique et interactions de démonstration.
+- [tests/](tests/) : tests de génération et de validation des tokens.
 
-**Important :** pour ce premier POC, `palette.json` et `css/theme.css` sont synchronisés manuellement. Modifier le JSON ne régénère PAS automatiquement les variables CSS. Une prochaine étape pourra introduire un petit script de génération et un package versionné pour éviter deux sources de vérité.
+Après toute modification de la palette, générer et versionner le CSS :
 
-## Réutiliser dans une application
+```sh
+npm run build
+npm run check
+npm test
+```
 
-1. Copier `css/theme.css` dans l'application ou l'importer depuis un package partagé.
-2. Placer `data-theme="light"` ou `data-theme="dark"` sur l'élément `<html>`.
-3. Utiliser les tokens : `background: var(--color-background); color: var(--color-text); border-color: var(--color-border);`.
-4. Réutiliser ou adapter `js/theme.js` pour basculer le thème (le sélecteur attend un bouton `data-theme-toggle`).
+`build` valide les tokens requis et régénère le fichier ; `check` vérifie sans
+écrire que le fichier existant est à jour ; `test` exécute les tests Node.js.
+Une valeur manquante ou invalide provoque une erreur explicite. Le générateur
+accepte les couleurs hexadécimales à six chiffres et les dimensions en pixels.
+Pour ajouter un token, adapter également la liste et la validation du générateur.
 
-## Accessibilité et comportement
+## Thèmes et intégration HTML
 
-- Le thème initial suit la préférence du système si aucun choix n'est enregistré.
-- Le choix explicite est mémorisé via `localStorage` et reste fonctionnel même si celui-ci est indisponible.
-- Le thème choisi est appliqué sur `<html>` et les composants lisent les tokens sémantiques.
-- Les animations respectent `prefers-reduced-motion`.
-- La forme multicolore est décorative, réalisée en CSS, sans image. Elle est attachée au fond global (`.page-shell`) et reste derrière le `header`, le `main` et le `footer` grâce à des couches explicites (`z-index`).
+Copier ou exposer le dossier `src` dans l'application, puis adapter les chemins :
+
+```html
+<head>
+  <!-- Synchrone avant les styles et le contenu pour éviter le flash de thème. -->
+  <script src="src/theme.js"></script>
+  <link rel="stylesheet" href="src/styles/theme.css">
+  <link rel="stylesheet" href="src/styles/typography.css">
+  <link rel="stylesheet" href="src/styles/components.css">
+</head>
+```
+
+Seul `theme.css` est nécessaire pour utiliser les tokens ; les styles de base,
+les composants et le script sont facultatifs. Les classes de composants
+actuelles incluent notamment `button`, `button-primary`, `button-secondary`,
+`panel`, `badge`, `badge-success`, `tag` et `form-panel`. Les styles de base
+s'appliquent globalement à la page : vérifier leur compatibilité avec les
+styles de l'application.
+
+Le script applique `data-theme="light"` ou `"dark"` sur `<html>` avant
+l'affichage. Sans choix enregistré, il suit `prefers-color-scheme`, y compris
+ses changements ; un choix explicite est enregistré sous `nicolabz-theme` dans
+`localStorage` et reste actif pour la session si le stockage est indisponible.
+Le script expose `window.nicolabzTheme.getTheme()`, `setTheme("light" | "dark")`
+et `toggle()`. À chaque application, l'événement `nicolabz-theme-change` est
+émis sur `window` avec `event.detail.theme`. Chaque application fournit ses
+propres contrôles et libellés accessibles.
+
+Sans script, le thème clair est utilisé par défaut ; l'application peut aussi
+définir elle-même `data-theme` sur `<html>`. La forme multicolore et son
+positionnement appartiennent à la démonstration : ses couches placent la
+décoration derrière le contenu. Les animations respectent
+`prefers-reduced-motion`.
+
+## Intégration Angular
+
+Copier `src` dans un emplacement servi comme ressource statique, par exemple
+`public/nicolabz/` dans une application Angular configurée pour servir
+`public`, puis inclure le script synchrone et les feuilles dans le `<head>` du
+document HTML principal avec les URL correspondantes, par exemple
+`nicolabz/theme.js` et `nicolabz/styles/theme.css`. Inclure également les
+feuilles de base et composants si souhaité. Le script ne dépend pas d'Angular ;
+un composant Angular peut appeler l'API ci-dessus et écouter l'événement pour
+mettre à jour ses contrôles. Adapter les URL à la configuration et au chemin de
+base de l'application. Les styles métier restent dans celle-ci.
 
 ## Limites
 
-- Les couleurs sombres sont une **interprétation** du langage visuel de nicolabz.dev, pas une extraction fidèle de son code source CSS.
+- Aucune publication npm, bibliothèque de framework ni garantie de compatibilité
+  d'API versionnée à ce stade ; copier ou servir les fichiers depuis le dépôt.
+- La palette sombre est une interprétation de l'identité visuelle, pas une
+  extraction du CSS de nicolabz.dev.
 - Le formulaire est une démonstration locale sans backend.
-- Aucune suite de tests navigateurs ou audit d'accessibilité complet n'est fournie.
-
-## Position de la forme colorée
-
-La forme est centrée dans le fond global via `.spectrum-art` (`left: 50%` et `transform: translateX(-50%)`). Pour la déplacer verticalement, modifier `top` dans `css/components.css`, y compris la règle mobile. Elle reste sous les textes et les composants grâce aux couches définies sur `.page-shell`.
+- Les tests automatisés couvrent les tokens ; ils ne remplacent pas un audit
+  complet d'accessibilité et de compatibilité des navigateurs.

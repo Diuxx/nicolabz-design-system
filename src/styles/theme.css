@@ -1,4 +1,4 @@
-/* Shared semantic tokens. Import this file before any application components. */
+/* Généré par scripts/build-tokens.js : ne pas modifier manuellement. */
 :root,
 :root[data-theme="light"] {
   color-scheme: light;
