@@ -5,8 +5,8 @@ const root = path.resolve(__dirname, "..");
 const palettePath = path.join(root, "tokens", "palette.json");
 const cssPath = path.join(root, "src", "styles", "theme.css");
 const colorNames = [
-  "background", "surface", "surfaceMuted", "text", "textSecondary", "border",
-  "accent", "accentContrast", "button", "buttonText", "success", "successSurface", "focus"
+  "background", "surface", "surfaceMuted", "text", "textSecondary", "border", "controlBorder",
+  "accent", "accentContrast", "button", "buttonText", "success", "successSurface", "focus", "error"
 ];
 const artNames = ["lavender", "blue", "peach", "mint"];
 const artDimension = /^(?:0|[1-9]\d*)(?:\.\d+)?px$/;
