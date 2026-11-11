@@ -54,7 +54,10 @@ cohérence du catalogue de composants avec les styles et la démonstration.
   réutilisables.
 - [src/theme.js](src/theme.js) : gestion du thème indépendante de la démo.
 - [demo/index.html](demo/index.html) et [demo/demo.css](demo/demo.css) :
-  présentation des composants, variantes, tokens et comportements existants.
+  galerie responsive avec navigation latérale, aperçus interactifs, thèmes et
+  exemples HTML copiables.
+- [demo/demo.js](demo/demo.js) : rendu des exemples depuis leurs modèles HTML,
+  copie du code et interactions locales de la galerie.
 - [tests/](tests/) : tests de génération et de validation des tokens.
 
 Le générateur accepte les couleurs hexadécimales à six chiffres et les
@@ -88,11 +91,11 @@ Copier ou exposer le dossier `src` dans l'application, puis adapter les chemins 
 ```
 
 Seul `theme.css` est nécessaire pour utiliser les tokens ; les styles de base,
-les composants et le script sont facultatifs. Les classes de composants
-actuelles incluent notamment `button`, `button-primary`, `button-secondary`,
-`panel`, `badge`, `badge-success`, `tag` et `form-panel`. Les styles de base
-s'appliquent globalement à la page : vérifier leur compatibilité avec les
-styles de l'application.
+les composants et le script sont facultatifs. Les composants actuels incluent notamment `button` (`button-primary`,
+`button-secondary`), `panel` (`panel-muted`), `badge` (`badge-success`), `tag`,
+`form-panel` et `nav-list`. Le catalogue détaille leurs éléments et états. Les
+styles de base s'appliquent globalement à la page : vérifier leur compatibilité
+avec les styles de l'application.
 
 Le script applique `data-theme="light"` ou `"dark"` sur `<html>` avant
 l'affichage. Sans choix enregistré, il suit `prefers-color-scheme`, y compris

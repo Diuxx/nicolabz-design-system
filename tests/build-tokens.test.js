@@ -8,7 +8,9 @@ const { generate } = require("../scripts/build-tokens.js");
 const palette = require("../tokens/palette.json");
 const componentCatalog = require("../tokens/components.json");
 const componentStyles = fs.readFileSync(path.join(__dirname, "..", "src", "styles", "components.css"), "utf8");
+const baseStyles = fs.readFileSync(path.join(__dirname, "..", "src", "styles", "typography.css"), "utf8");
 const demoMarkup = fs.readFileSync(path.join(__dirname, "..", "demo", "index.html"), "utf8");
+const demoStyles = fs.readFileSync(path.join(__dirname, "..", "demo", "demo.css"), "utf8");
 
 test("génère tous les tokens des deux thèmes de manière déterministe", () => {
   const css = generate(palette);
@@ -52,6 +54,7 @@ test("rejette les valeurs manquantes, mal formées et les tokens inconnus", () =
 test("le catalogue décrit les composants CSS effectivement présentés dans la démo", () => {
   const selectors = Array.from(componentStyles.matchAll(/([^{}]+)\{/g))
     .flatMap((match) => match[1].split(",").map((selector) => selector.trim()));
+  const allStyles = `${componentStyles}\n${baseStyles}`;
   const demoClasses = new Set(
     Array.from(demoMarkup.matchAll(/\bclass="([^"]+)"/g))
       .flatMap((match) => match[1].split(/\s+/))
@@ -72,6 +75,24 @@ test("le catalogue décrit les composants CSS effectivement présentés dans la 
       const element = elementSelector.slice(component.selector.length).trim();
       assert.match(demoMarkup, new RegExp(`<${element}\\b`), `${elementSelector} doit être présenté dans la démo`);
     }
+    for (const state of component.states || []) {
+      const stateIsImplemented = {
+        hover: selectors.some((selector) => selector.includes(":hover") && selector.startsWith(component.selector)),
+        "focus-visible": allStyles.includes(":focus-visible"),
+        focus: allStyles.includes(":focus:enabled"),
+        current: allStyles.includes('[aria-current="page"]')
+      }[state];
+      assert.equal(stateIsImplemented, true, `${component.selector} doit implémenter l'état ${state}`);
+    }
+  }
+});
+
+test("la décoration de la démo utilise les tokens de palette et reste non sémantique", () => {
+  assert.match(demoMarkup, /<div class="spectrum-art" aria-hidden="true">/);
+  assert.match(demoStyles, /opacity:\s*var\(--art-opacity\)/);
+  assert.match(demoStyles, /filter:\s*blur\(var\(--art-blur\)\)/);
+  for (const color of ["lavender", "blue", "peach", "mint"]) {
+    assert.ok(demoStyles.includes(`var(--color-art-${color})`));
   }
 });
 

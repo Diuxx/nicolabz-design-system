@@ -18,7 +18,9 @@
       "name": "Panel",
       "description": "Container for grouping related content.",
       "selector": ".panel",
-      "variants": {},
+      "variants": {
+        "muted": ".panel-muted"
+      },
       "states": []
     },
     {
@@ -45,11 +47,24 @@
       "elements": {
         "label": ".form-panel label",
         "input": ".form-panel input",
-        "select": ".form-panel select"
+        "select": ".form-panel select",
+        "textarea": ".form-panel textarea",
+        "button": ".form-panel button"
       },
       "states": ["focus", "focus-visible"],
       "variants": {},
       "usage": "Apply .form-panel to a parent container."
+    },
+    {
+      "name": "Navigation List",
+      "description": "Vertical list of links with hover and current-page styling.",
+      "selector": ".nav-list",
+      "elements": {
+        "link": ".nav-list a"
+      },
+      "states": ["hover", "focus-visible", "current"],
+      "variants": {},
+      "usage": "Use semantic navigation markup and aria-current=\"page\" for the current page."
     }
   ]
 }

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="color-scheme" content="light dark" />
     <meta name="theme-color" content="" />
-    <title>nicolabz — Design system</title>
+    <title>Composants — Nicolabz Design System</title>
     <script src="../src/theme.js"></script>
     <link rel="stylesheet" href="../src/styles/theme.css" />
     <link rel="stylesheet" href="../src/styles/typography.css" />
@@ -14,85 +14,201 @@
     <script src="demo.js" defer></script>
   </head>
   <body>
-    <div class="page-shell">
+    <a class="skip-link" href="#main-content">Aller au contenu</a>
+    <div class="gallery-shell">
       <!-- Decorative background shared by the entire page, outside content sections. -->
       <div class="spectrum-art" aria-hidden="true">
         <div class="spectrum-art__shape"></div>
       </div>
-      <header class="site-header container">
-        <a class="brand" href="#accueil" aria-label="Accueil nicolabz">&gt;_ nicolabz<span class="brand-dot">.</span>dev</a>
-        <nav class="navigation" aria-label="Navigation principale">
-          <a href="#composants">Composants</a>
-          <a href="#palette">Palette</a>
+      <aside class="sidebar" aria-label="Navigation du design system">
+        <a class="brand" href="#overview" aria-label="Nicolabz Design System, accueil">
+          <span class="brand-mark" aria-hidden="true">&gt;_</span>
+          <span>nicolabz<span class="brand-dot">.</span>dev</span>
+        </a>
+        <p class="sidebar-caption">DESIGN SYSTEM <span>·</span> UI LIBRARY</p>
+        <nav aria-label="Sections de la bibliothèque">
+          <p class="sidebar-heading">FONDATIONS</p>
+          <ul class="nav-list gallery-nav">
+            <li><a href="#overview">Vue d'ensemble</a></li>
+          </ul>
+          <p class="sidebar-heading">COMPOSANTS</p>
+          <ul class="nav-list gallery-nav">
+            <li><a href="#actions">Actions</a></li>
+            <li><a href="#forms">Formulaires</a></li>
+            <li><a href="#containers">Conteneurs</a></li>
+            <li><a href="#indicators">Indicateurs</a></li>
+            <li><a href="#navigation">Navigation</a></li>
+          </ul>
         </nav>
-        <button class="theme-toggle" type="button" data-theme-toggle aria-label="Activer le thème sombre" aria-pressed="false">
-          <span data-theme-icon aria-hidden="true">☾</span>
-          <span data-theme-label>Mode sombre</span>
-        </button>
-      </header>
+        <p class="sidebar-note">HTML · CSS natif<br />Clair et sombre</p>
+      </aside>
 
-      <main id="accueil">
-        <section class="hero container" aria-labelledby="hero-title">
-          <div class="hero-copy">
-            <p class="eyebrow"><span class="status-dot"></span> DESIGN SYSTEM / THÈMES CLAIR · SOMBRE</p>
-            <h1 id="hero-title">Des interfaces simples.<br /><span>Une identité qui respire.</span></h1>
-            <p class="hero-description">Un langage visuel partagé pour les projets nicolabz. Minimal, lisible et pensé pour fonctionner aussi bien dans la lumière que dans l'obscurité.</p>
-            <div class="button-row">
-              <a class="button button-primary" href="#composants">Explorer les composants <span aria-hidden="true">↗</span></a>
-              <a class="button button-secondary" href="#palette">Voir les couleurs</a>
+      <div class="workspace">
+        <header class="topbar">
+          <p class="breadcrumb"><span>Bibliothèque</span><span aria-hidden="true">/</span> Composants</p>
+          <button class="button button-secondary theme-toggle" type="button" data-theme-toggle aria-label="Activer le thème sombre" aria-pressed="false">
+            <span data-theme-icon aria-hidden="true">☾</span>
+            <span data-theme-label>Mode sombre</span>
+          </button>
+        </header>
+
+        <main id="main-content" class="gallery-content">
+          <section id="overview" class="intro-section" aria-labelledby="page-title">
+            <p class="eyebrow"><span class="status-dot"></span> NICOLABZ DESIGN SYSTEM</p>
+            <h1 id="page-title">Bibliothèque de composants<span>.</span></h1>
+            <p class="intro-copy">Des éléments sobres, accessibles et réutilisables. Explore les aperçus, teste leurs états au clavier et copie le HTML pour les intégrer.</p>
+            <div class="intro-meta">
+              <span><span class="meta-dot"></span> Thèmes clair et sombre</span>
+              <span>Sans dépendance</span>
+              <span>HTML · CSS · JavaScript</span>
             </div>
-          </div>
-          <div class="hero-footnote"><span>01 / IDENTITÉ</span><span>CLAIR · SOMBRE</span></div>
-        </section>
+          </section>
 
-        <section id="composants" class="section container" aria-labelledby="components-title">
-          <div class="section-heading"><div><p class="eyebrow">02 / BIBLIOTHÈQUE</p><h2 id="components-title">Composants.</h2></div><p>Des blocs simples à réutiliser dans tes interfaces.</p></div>
-          <div class="demo-grid">
-            <article class="panel component-showcase">
-              <div class="panel-heading"><span class="micro-label">PANEL · COMPOSANTS</span></div>
-              <div class="showcase-group">
-                <span class="micro-label">BUTTON · VARIANTES</span>
-                <div class="button-row">
-                  <a class="button button-primary" href="#palette">Primaire</a>
-                  <a class="button button-secondary" href="#formulaire">Secondaire</a>
-                </div>
-                <p class="showcase-note">Survol et focus clavier sont pris en charge.</p>
+          <section id="actions" class="category-section" aria-labelledby="actions-title">
+            <header class="category-heading">
+              <div><p class="eyebrow">01 / ACTIONS</p><h2 id="actions-title">Boutons</h2></div>
+              <p>Actions primaires et secondaires avec retour au survol et focus clavier.</p>
+            </header>
+            <article id="buttons" class="story-card panel" data-story="buttons" aria-labelledby="buttons-title">
+              <div class="story-heading">
+                <div><h3 id="buttons-title">Button</h3><p>Élément interactif pour déclencher ou poursuivre une action.</p></div>
+                <code class="selector-chip">.button</code>
               </div>
-              <div class="showcase-group">
-                <span class="micro-label">BADGE · VARIANTES</span>
-                <div class="tag-list"><span class="badge">Par défaut</span><span class="badge badge-success">Succès</span></div>
-              </div>
-              <div class="showcase-group">
-                <span class="micro-label">TAG</span>
-                <div class="tag-list"><span class="tag">Java</span><span class="tag">Angular</span><span class="tag">Ops</span></div>
-              </div>
+              <div class="story-preview" data-preview="buttons" aria-label="Aperçu des variantes de bouton"></div>
+              <p class="state-note"><strong>Variantes</strong> Primary · Secondary <span aria-hidden="true">/</span> <strong>États</strong> Hover · Focus clavier</p>
+              <details class="code-details">
+                <summary>Exemple HTML</summary>
+                <div class="code-toolbar"><button class="button button-secondary copy-button" type="button" data-copy>Copier le code</button><span data-copy-status aria-live="polite"></span></div>
+                <pre><code data-code></code></pre>
+              </details>
+              <template data-example="buttons">
+                <button class="button button-primary" type="button">Action principale</button>
+                <button class="button button-secondary" type="button">Action secondaire</button>
+              </template>
             </article>
-            <article id="formulaire" class="panel form-panel">
-              <div class="panel-heading"><span class="micro-label">FORM PANEL</span><span class="badge">Prototype</span></div>
-              <form id="demo-form">
-                <label for="project-name">Nom du projet</label>
-                <input id="project-name" name="project" type="text" placeholder="Mon prochain projet" required maxlength="80" />
-                <label for="category">Catégorie</label>
-                <select id="category" name="category"><option value="application">Application web</option><option value="infrastructure">Infrastructure</option><option value="automation">Automatisation</option></select>
-                <button class="button button-primary full-width" type="submit">Créer un brouillon <span aria-hidden="true">↗</span></button>
-                <p id="form-feedback" class="form-feedback" role="status" aria-live="polite">Démonstration locale, aucune donnée envoyée.</p>
-              </form>
-            </article>
-          </div>
-        </section>
+          </section>
 
-        <section id="palette" class="section palette-section container" aria-labelledby="palette-title">
-          <div class="section-heading"><div><p class="eyebrow">03 / DESIGN TOKENS</p><h2 id="palette-title">Couleurs.</h2></div><p>Des rôles sémantiques, indépendants des composants.</p></div>
-          <div class="swatches">
-            <div class="swatch"><span class="swatch-color swatch-background"></span><strong>Background</strong><code>--color-background</code></div>
-            <div class="swatch"><span class="swatch-color swatch-surface"></span><strong>Surface</strong><code>--color-surface</code></div>
-            <div class="swatch"><span class="swatch-color swatch-text"></span><strong>Text</strong><code>--color-text</code></div>
-            <div class="swatch"><span class="swatch-color swatch-accent"></span><strong>Accent</strong><code>--color-accent</code></div>
-            <div class="swatch"><span class="swatch-color swatch-border"></span><strong>Border</strong><code>--color-border</code></div>
-          </div>
-        </section>
-      </main>
-      <footer class="site-footer container"><span>© nicolabz.dev — UI playground</span><span>Design tokens · CSS natif · Sans dépendances</span></footer>
+          <section id="forms" class="category-section" aria-labelledby="forms-title">
+            <header class="category-heading">
+              <div><p class="eyebrow">02 / SAISIE</p><h2 id="forms-title">Formulaires</h2></div>
+              <p>Libellés et contrôles natifs dans un conteneur de formulaire cohérent.</p>
+            </header>
+            <article id="form-panel-component" class="story-card panel" data-story="forms" aria-labelledby="form-panel-title">
+              <div class="story-heading">
+                <div><h3 id="form-panel-title">Form Panel</h3><p>Styles ciblés pour les champs texte, listes, zones de texte et cases à cocher.</p></div>
+                <code class="selector-chip">.form-panel</code>
+              </div>
+              <div class="story-preview story-preview-form" data-preview="forms" aria-label="Aperçu des contrôles de formulaire"></div>
+              <p class="state-note"><strong>Éléments</strong> Label · Input · Select · Textarea <span aria-hidden="true">/</span> <strong>États</strong> Focus · Focus clavier</p>
+              <details class="code-details">
+                <summary>Exemple HTML</summary>
+                <div class="code-toolbar"><button class="button button-secondary copy-button" type="button" data-copy>Copier le code</button><span data-copy-status aria-live="polite"></span></div>
+                <pre><code data-code></code></pre>
+              </details>
+              <template data-example="forms">
+                <form id="demo-form" class="form-panel">
+                  <label for="example-name">Nom</label>
+                  <input id="example-name" name="name" type="text" placeholder="Ton nom" required maxlength="80" />
+                  <label for="example-role">Rôle</label>
+                  <select id="example-role" name="role">
+                    <option>Designer</option>
+                    <option>Développeur</option>
+                  </select>
+                  <label for="example-message">Message</label>
+                  <textarea id="example-message" name="message" placeholder="Quelques mots..."></textarea>
+                  <label for="example-updates"><input id="example-updates" name="updates" type="checkbox" /> Recevoir les nouvelles</label>
+                  <button class="button button-primary" type="submit">Créer un brouillon</button>
+                  <p id="form-feedback" class="form-feedback" role="status" aria-live="polite">Démo locale, aucune donnée envoyée.</p>
+                </form>
+              </template>
+            </article>
+          </section>
+
+          <section id="containers" class="category-section" aria-labelledby="containers-title">
+            <header class="category-heading">
+              <div><p class="eyebrow">03 / STRUCTURE</p><h2 id="containers-title">Conteneurs</h2></div>
+              <p>Surfaces pour regrouper du contenu avec différents niveaux de contraste.</p>
+            </header>
+            <article id="panels" class="story-card panel" data-story="containers" aria-labelledby="panels-title">
+              <div class="story-heading">
+                <div><h3 id="panels-title">Panel</h3><p>Conteneur simple avec surface, bordure et rayon sémantique.</p></div>
+                <code class="selector-chip">.panel</code>
+              </div>
+              <div class="story-preview" data-preview="containers" aria-label="Aperçu des variantes de panneau"></div>
+              <p class="state-note"><strong>Variantes</strong> Default · Muted <span aria-hidden="true">/</span> Aucun état interactif</p>
+              <details class="code-details">
+                <summary>Exemple HTML</summary>
+                <div class="code-toolbar"><button class="button button-secondary copy-button" type="button" data-copy>Copier le code</button><span data-copy-status aria-live="polite"></span></div>
+                <pre><code data-code></code></pre>
+              </details>
+              <template data-example="containers">
+                <div class="panel">Surface standard</div>
+                <div class="panel panel-muted">Surface atténuée</div>
+              </template>
+            </article>
+          </section>
+
+          <section id="indicators" class="category-section" aria-labelledby="indicators-title">
+            <header class="category-heading">
+              <div><p class="eyebrow">04 / STATUT</p><h2 id="indicators-title">Indicateurs</h2></div>
+              <p>Badges pour un statut concis et tags pour classer le contenu.</p>
+            </header>
+            <article id="badges-tags" class="story-card panel" data-story="indicators" aria-labelledby="badges-title">
+              <div class="story-heading">
+                <div><h3 id="badges-title">Badge &amp; Tag</h3><p>Indicateurs compacts, sans interaction, qui héritent des couleurs du thème.</p></div>
+                <code class="selector-chip">.badge · .tag</code>
+              </div>
+              <div class="story-preview" data-preview="indicators" aria-label="Aperçu des badges et tags"></div>
+              <p class="state-note"><strong>Badge</strong> Default · Success <span aria-hidden="true">/</span> <strong>Tag</strong> Default</p>
+              <details class="code-details">
+                <summary>Exemple HTML</summary>
+                <div class="code-toolbar"><button class="button button-secondary copy-button" type="button" data-copy>Copier le code</button><span data-copy-status aria-live="polite"></span></div>
+                <pre><code data-code></code></pre>
+              </details>
+              <template data-example="indicators">
+                <span class="badge">En attente</span>
+                <span class="badge badge-success">En ligne</span>
+                <span class="tag">Documentation</span>
+                <span class="tag">Version 1.0</span>
+              </template>
+            </article>
+          </section>
+
+          <section id="navigation" class="category-section" aria-labelledby="navigation-title">
+            <header class="category-heading">
+              <div><p class="eyebrow">05 / ORIENTATION</p><h2 id="navigation-title">Navigation</h2></div>
+              <p>Liens verticaux avec traitement du survol et indication de page courante.</p>
+            </header>
+            <article id="navigation-list" class="story-card panel" data-story="navigation" aria-labelledby="navigation-list-title">
+              <div class="story-heading">
+                <div><h3 id="navigation-list-title">Navigation List</h3><p>Liste de liens sémantique adaptée aux menus de section.</p></div>
+                <code class="selector-chip">.nav-list</code>
+              </div>
+              <div class="story-preview story-preview-navigation" data-preview="navigation" aria-label="Aperçu de la liste de navigation"></div>
+              <p class="state-note"><strong>États</strong> Hover · Focus clavier · Page courante (<code>aria-current</code>)</p>
+              <details class="code-details">
+                <summary>Exemple HTML</summary>
+                <div class="code-toolbar"><button class="button button-secondary copy-button" type="button" data-copy>Copier le code</button><span data-copy-status aria-live="polite"></span></div>
+                <pre><code data-code></code></pre>
+              </details>
+              <template data-example="navigation">
+                <nav aria-label="Navigation de compte">
+                  <ul class="nav-list">
+                    <li><a href="#overview" aria-current="page">Vue d'ensemble</a></li>
+                    <li><a href="#forms">Préférences</a></li>
+                    <li><a href="#indicators">Notifications</a></li>
+                  </ul>
+                </nav>
+              </template>
+            </article>
+          </section>
+
+          <footer class="gallery-footer">
+            <span>© nicolabz.dev</span>
+            <span>Tokens · CSS natif · Sans dépendances</span>
+          </footer>
+        </main>
+      </div>
     </div>
   </body>
 </html>
