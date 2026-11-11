@@ -9,6 +9,7 @@ const colorNames = [
   "accent", "accentContrast", "button", "buttonText", "success", "successSurface", "focus"
 ];
 const artNames = ["lavender", "blue", "peach", "mint"];
+const artDimension = /^(?:0|[1-9]\d*)(?:\.\d+)?px$/;
 const radiusNames = ["sm", "md", "lg"];
 const spacingNames = ["1", "2", "3", "4", "6", "8", "12", "16"];
 
@@ -50,7 +51,19 @@ function generate(palette) {
         throw new Error(`themes.${theme}.${name} possède une couleur invalide.`);
       }
     }
-    validateValues(values.art, artNames, `themes.${theme}.art`, /^#[0-9a-f]{6}$/i);
+    requireKeys(values.art, [...artNames, "opacity", "blur"], `themes.${theme}.art`);
+    validateValues(
+      Object.fromEntries(artNames.map((name) => [name, values.art[name]])),
+      artNames,
+      `themes.${theme}.art`,
+      /^#[0-9a-f]{6}$/i
+    );
+    if (typeof values.art.opacity !== "string" || !/^(?:0|0?\.\d+|1(?:\.0+)?)$/.test(values.art.opacity)) {
+      throw new Error(`themes.${theme}.art.opacity possède une valeur invalide.`);
+    }
+    if (typeof values.art.blur !== "string" || !artDimension.test(values.art.blur)) {
+      throw new Error(`themes.${theme}.art.blur possède une valeur invalide.`);
+    }
   }
   const dimension = /^(?:0|[1-9]\d*)(?:\.\d+)?px$/;
   validateValues(palette.radii, radiusNames, "radii", dimension);
@@ -63,8 +76,8 @@ function generate(palette) {
     lines.push(`  color-scheme: ${theme};`);
     for (const name of colorNames) lines.push(`  --color-${kebab(name)}: ${values[name].toLowerCase()};`);
     for (const name of artNames) lines.push(`  --color-art-${name}: ${values.art[name].toLowerCase()};`);
-    lines.push(`  --art-opacity: ${theme === "light" ? "0.87" : "0.17"};`);
-    lines.push(`  --art-blur: ${theme === "light" ? "3px" : "18px"};`);
+    lines.push(`  --art-opacity: ${values.art.opacity};`);
+    lines.push(`  --art-blur: ${values.art.blur};`);
     if (theme === "light") {
       for (const name of radiusNames) lines.push(`  --radius-${name}: ${palette.radii[name]};`);
       for (const name of spacingNames) lines.push(`  --space-${name}: ${palette.spacing[name]};`);

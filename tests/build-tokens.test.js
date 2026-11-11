@@ -6,6 +6,9 @@ const { spawnSync } = require("node:child_process");
 const test = require("node:test");
 const { generate } = require("../scripts/build-tokens.js");
 const palette = require("../tokens/palette.json");
+const componentCatalog = require("../tokens/components.json");
+const componentStyles = fs.readFileSync(path.join(__dirname, "..", "src", "styles", "components.css"), "utf8");
+const demoMarkup = fs.readFileSync(path.join(__dirname, "..", "demo", "index.html"), "utf8");
 
 test("génère tous les tokens des deux thèmes de manière déterministe", () => {
   const css = generate(palette);
@@ -14,9 +17,11 @@ test("génère tous les tokens des deux thèmes de manière déterministe", () =
     const section = css.split(theme === "light" ? ':root[data-theme="light"] {' : ':root[data-theme="dark"] {')[1].split("}")[0];
     for (const [name, value] of Object.entries(palette.themes[theme])) {
       if (name === "art") {
-        for (const [artName, artValue] of Object.entries(value)) {
+        for (const [artName, artValue] of Object.entries(value).filter(([key]) => key !== "opacity" && key !== "blur")) {
           assert.ok(section.includes(`--color-art-${artName}: ${artValue.toLowerCase()};`));
         }
+        assert.ok(section.includes(`--art-opacity: ${value.opacity};`));
+        assert.ok(section.includes(`--art-blur: ${value.blur};`));
       } else {
         const cssName = name.replace(/[A-Z]/g, (letter) => `-${letter.toLowerCase()}`);
         assert.ok(section.includes(`--color-${cssName}: ${value.toLowerCase()};`));
@@ -32,6 +37,8 @@ test("rejette les valeurs manquantes, mal formées et les tokens inconnus", () =
   for (const mutate of [
     (p) => { delete p.themes.dark.accent; },
     (p) => { p.themes.light.art.blue = "red"; },
+    (p) => { p.themes.dark.art.opacity = "1.5"; },
+    (p) => { p.themes.light.art.blur = "-2px"; },
     (p) => { p.radii.md = "14"; },
     (p) => { p.spacing["4"] = "-16px"; },
     (p) => { p.themes.light.extra = "#FFFFFF"; }
@@ -39,6 +46,32 @@ test("rejette les valeurs manquantes, mal formées et les tokens inconnus", () =
     const copy = structuredClone(palette);
     mutate(copy);
     assert.throws(() => generate(copy));
+  }
+});
+
+test("le catalogue décrit les composants CSS effectivement présentés dans la démo", () => {
+  const selectors = Array.from(componentStyles.matchAll(/([^{}]+)\{/g))
+    .flatMap((match) => match[1].split(",").map((selector) => selector.trim()));
+  const demoClasses = new Set(
+    Array.from(demoMarkup.matchAll(/\bclass="([^"]+)"/g))
+      .flatMap((match) => match[1].split(/\s+/))
+  );
+
+  for (const component of componentCatalog.components) {
+    assert.ok(
+      selectors.includes(component.selector) || selectors.some((selector) => selector.startsWith(`${component.selector} `)),
+      `${component.selector} doit être défini en CSS`
+    );
+    assert.ok(demoClasses.has(component.selector.slice(1)), `${component.selector} doit être présenté dans la démo`);
+    for (const variantSelector of Object.values(component.variants || {})) {
+      assert.ok(selectors.includes(variantSelector), `${variantSelector} doit être défini en CSS`);
+      assert.ok(demoClasses.has(variantSelector.slice(1)), `${variantSelector} doit être présenté dans la démo`);
+    }
+    for (const elementSelector of Object.values(component.elements || {})) {
+      assert.ok(selectors.includes(elementSelector), `${elementSelector} doit être défini en CSS`);
+      const element = elementSelector.slice(component.selector.length).trim();
+      assert.match(demoMarkup, new RegExp(`<${element}\\b`), `${elementSelector} doit être présenté dans la démo`);
+    }
   }
 });
 

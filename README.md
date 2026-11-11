@@ -1,31 +1,30 @@
 # Nicolabz Design System
 
-Base HTML/CSS/JavaScript sans framework ni dépendances externes, avec une
-démonstration autonome. La direction visuelle est décrite dans [DESIGN.md](DESIGN.md).
+Design system léger, sans framework ni dépendance externe, proposant des tokens,
+des composants CSS réutilisables, la gestion des thèmes clair/sombre et une
+démonstration autonome. La direction visuelle est décrite dans
+[docs/DESIGN.md](docs/DESIGN.md).
 
-## Démarrer
+## Technologies
 
-Ouvrir [demo/index.html](demo/index.html) directement dans un navigateur. Aucun
-serveur applicatif ni installation npm n'est nécessaire pour la démonstration.
-Node.js 18 ou plus récent est nécessaire pour la génération et les tests.
+- HTML, CSS et JavaScript natifs pour le design system et sa démonstration.
+- Node.js 18 ou plus récent pour la génération des tokens et les tests.
+- Aucune dépendance npm externe.
 
-## Architecture
+## Prérequis et installation
 
-- [tokens/palette.json](tokens/palette.json) : source de vérité des couleurs,
-  rayons et espacements des deux thèmes.
-- [scripts/build-tokens.js](scripts/build-tokens.js) : validation et génération.
-- [src/styles/theme.css](src/styles/theme.css) : **fichier généré**, à ne jamais
-  modifier manuellement. Il contient les variables et les propriétés de rendu
-  propres aux thèmes, dont l'opacité et le flou de la forme décorative.
-- [src/styles/typography.css](src/styles/typography.css) : styles de base,
-  focus et réduction des animations.
-- [src/styles/components.css](src/styles/components.css) : composants CSS
-  réutilisables.
-- [src/theme.js](src/theme.js) : gestion du thème indépendante de la démo.
-- [demo/](demo/) : page, présentation spécifique et interactions de démonstration.
-- [tests/](tests/) : tests de génération et de validation des tokens.
+Pour consulter la démonstration, un navigateur moderne suffit. Pour générer les
+tokens ou lancer les tests, installer Node.js 18 ou une version plus récente.
+Aucune installation de dépendances n'est nécessaire.
 
-Après toute modification de la palette, générer et versionner le CSS :
+## Lancer la démonstration
+
+Ouvrir [demo/index.html](demo/index.html) directement dans un navigateur. La
+démonstration est autonome et ne nécessite pas de serveur applicatif.
+
+## Build et tests
+
+Après toute modification des tokens, exécuter :
 
 ```sh
 npm run build
@@ -33,11 +32,46 @@ npm run check
 npm test
 ```
 
-`build` valide les tokens requis et régénère le fichier ; `check` vérifie sans
-écrire que le fichier existant est à jour ; `test` exécute les tests Node.js.
-Une valeur manquante ou invalide provoque une erreur explicite. Le générateur
-accepte les couleurs hexadécimales à six chiffres et les dimensions en pixels.
-Pour ajouter un token, adapter également la liste et la validation du générateur.
+`build` valide les tokens et régénère le CSS ; `check` vérifie que le CSS est à
+jour sans écrire de fichier ; `test` exécute les tests Node.js, dont la
+cohérence du catalogue de composants avec les styles et la démonstration.
+
+## Architecture
+
+- [tokens/palette.json](tokens/palette.json) : source de vérité des couleurs,
+  rayons, espacements et paramètres décoratifs (couleurs, opacité et flou) des
+  deux thèmes.
+- [tokens/components.json](tokens/components.json) : catalogue des composants,
+  variantes et états réellement disponibles.
+- [scripts/build-tokens.js](scripts/build-tokens.js) : validation de la palette
+  et génération des variables CSS.
+- [src/styles/theme.css](src/styles/theme.css) : **fichier généré**, à ne jamais
+  modifier manuellement. Il contient les variables et les propriétés de rendu
+  générées à partir de la palette.
+- [src/styles/typography.css](src/styles/typography.css) : styles de base,
+  focus et réduction des animations.
+- [src/styles/components.css](src/styles/components.css) : composants CSS
+  réutilisables.
+- [src/theme.js](src/theme.js) : gestion du thème indépendante de la démo.
+- [demo/index.html](demo/index.html) et [demo/demo.css](demo/demo.css) :
+  présentation des composants, variantes, tokens et comportements existants.
+- [tests/](tests/) : tests de génération et de validation des tokens.
+
+Le générateur accepte les couleurs hexadécimales à six chiffres et les
+dimensions en pixels. Une valeur manquante ou invalide provoque une erreur
+explicite. Pour ajouter un token, adapter également la validation et la génération.
+
+## Configuration des tokens et des thèmes
+
+Modifier les valeurs globales dans [tokens/palette.json](tokens/palette.json),
+puis lancer `npm run build`. Ne pas modifier directement
+[src/styles/theme.css](src/styles/theme.css). Toute évolution de composant doit
+rester synchronisée entre le catalogue, [src/styles/components.css](src/styles/components.css)
+et la démonstration.
+
+Aucune variable d'environnement ni configuration externe n'est requise. Le
+thème explicite est enregistré dans `localStorage` sous la clé
+`nicolabz-theme`.
 
 ## Thèmes et intégration HTML
 

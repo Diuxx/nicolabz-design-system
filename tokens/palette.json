@@ -1,7 +1,7 @@
 {
   "$schema": "https://design-tokens.github.io/community-group/format/",
   "name": "nicolabz-ui",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "themes": {
     "light": {
       "background": "#FAFAF8",
@@ -21,7 +21,9 @@
         "lavender": "#D7C7F5",
         "blue": "#B9DDE8",
         "peach": "#F1CDBE",
-        "mint": "#C7E5D2"
+        "mint": "#C7E5D2",
+        "opacity": "0.87",
+        "blur": "3px"
       }
     },
     "dark": {
@@ -42,7 +44,9 @@
         "lavender": "#526052",
         "blue": "#405C57",
         "peach": "#5A5F4C",
-        "mint": "#4B6654"
+        "mint": "#4B6654",
+        "opacity": "0.17",
+        "blur": "18px"
       }
     }
   },

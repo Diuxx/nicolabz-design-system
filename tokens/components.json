@@ -1,0 +1,55 @@
+
+{
+  "version": "0.2.0",
+  "source": "src/styles/components.css",
+  "components": [
+    {
+      "name": "Button",
+      "description": "Interactive element for user actions.",
+      "selector": ".button",
+      "variants": {
+        "primary": ".button-primary",
+        "secondary": ".button-secondary"
+      },
+      "states": ["hover", "focus-visible"],
+      "usage": "Combine .button with a variant class."
+    },
+    {
+      "name": "Panel",
+      "description": "Container for grouping related content.",
+      "selector": ".panel",
+      "variants": {},
+      "states": []
+    },
+    {
+      "name": "Badge",
+      "description": "Compact status or information indicator.",
+      "selector": ".badge",
+      "variants": {
+        "success": ".badge-success"
+      },
+      "states": [],
+      "usage": "Combine .badge with .badge-success for success states."
+    },
+    {
+      "name": "Tag",
+      "description": "Small label for categorizing content.",
+      "selector": ".tag",
+      "variants": {},
+      "states": []
+    },
+    {
+      "name": "Form Panel",
+      "description": "Scoped form styling for labels, inputs, and selects.",
+      "selector": ".form-panel",
+      "elements": {
+        "label": ".form-panel label",
+        "input": ".form-panel input",
+        "select": ".form-panel select"
+      },
+      "states": ["focus", "focus-visible"],
+      "variants": {},
+      "usage": "Apply .form-panel to a parent container."
+    }
+  ]
+}
