@@ -1,7 +1,19 @@
 {
-  "name": "nz-design-system",
+  "name": "@nicolabz/design-system",
   "version": "0.4.0",
   "private": true,
+  "files": ["src"],
+  "sideEffects": [
+    "**/*.css",
+    "./src/theme.js"
+  ],
+  "exports": {
+    "./theme.css": "./src/styles/theme.css",
+    "./components.css": "./src/styles/components.css",
+    "./typography.css": "./src/styles/typography.css",
+    "./decorations.css": "./src/styles/decorations.css",
+    "./theme.js": "./src/theme.js"
+  },
   "scripts": {
     "build": "node scripts/build-tokens.js",
     "check": "node scripts/build-tokens.js --check",
