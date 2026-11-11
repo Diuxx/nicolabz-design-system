@@ -33,6 +33,25 @@ For any interface creation or modification:
 - Do not introduce new visual styles or UI dependencies without clear justification.
 - Follow existing project conventions and architecture.
 
+### CSS Class Naming — Mandatory
+
+- All new public CSS classes **MUST use the `nz-` prefix**. This applies to components, variants, states, and reusable decorations.
+- Always use prefixed classes in new HTML, components, templates, and documentation examples.
+- Existing unprefixed classes are deprecated compatibility aliases. Preserve them for existing consumers, but never use them in new development.
+- Demo-specific layout classes, such as `.gallery-shell`, are exempt because they are not part of the public design system API.
+- Existing design tokens (`--color-*`, `--space-*`, `--radius-*`) retain their current naming conventions.
+- When adding or changing a public component, keep `src/styles/components.css`, `tokens/components.json`, `demo/index.html`, documentation, and tests synchronized.
+
+**Examples**
+
+| Deprecated | Required |
+|---|---|
+| `.button` | `.nz-button` |
+| `.button-primary` | `.nz-button-primary` |
+| `.panel` | `.nz-panel` |
+| `.form-panel` | `.nz-form-panel` |
+| `.spectrum-art` | `.nz-spectrum` |
+
 ## 4. Design Tokens
 
 `tokens/palette.json` is the **single source of truth** for design values.

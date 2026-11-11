@@ -1,6 +1,6 @@
 {
-  "name": "nicolabz-design-system",
-  "version": "0.1.0",
+  "name": "nz-design-system",
+  "version": "0.4.0",
   "private": true,
   "scripts": {
     "build": "node scripts/build-tokens.js",
