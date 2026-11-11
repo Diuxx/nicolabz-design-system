@@ -32,7 +32,7 @@ Avant toute modification :
 2. Identifier le framework utilisé et son système de styles.
 3. Consulter le dépôt de référence GitHub.
 4. Lire impérativement les fichiers :
-   - `DESIGN.md`
+   - `docs/DESIGN.md`
    - `AGENTS.md`
    - `README.md`
    - `tokens/palette.json`

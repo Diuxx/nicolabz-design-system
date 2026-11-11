@@ -22,6 +22,10 @@ clair/sombre et d'une galerie de composants interactive.
 
 ## Conventions
 
+- `typography.css` est facultatif et s’active via `class="nz-base"` sur `<body>`.
+- `--color-control-border` assure la lisibilité des contours de champs.
+
+
 - Modifier `tokens/palette.json`, puis lancer `npm run build`; ne jamais éditer
   directement le CSS généré.
 - Synchroniser catalogue, styles partagés et démonstration lorsqu'un composant,

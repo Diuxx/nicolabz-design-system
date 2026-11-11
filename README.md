@@ -60,6 +60,8 @@ cohérence du catalogue de composants avec les styles et la démonstration.
   copie du code et interactions locales de la galerie.
 - [tests/](tests/) : tests de génération et de validation des tokens.
 
+Le token `--color-control-border` est dédié aux contours des champs, dont le contraste est renforcé dans les deux thèmes.
+
 Le générateur accepte les couleurs hexadécimales à six chiffres et les
 dimensions en pixels. Une valeur manquante ou invalide provoque une erreur
 explicite. Pour ajouter un token, adapter également la validation et la génération.
@@ -94,8 +96,9 @@ Seul `theme.css` est nécessaire pour utiliser les tokens ; les styles de base,
 les composants et le script sont facultatifs. Les composants actuels incluent notamment `button` (`button-primary`,
 `button-secondary`), `panel` (`panel-muted`), `badge` (`badge-success`), `tag`,
 `form-panel` et `nav-list`. Le catalogue détaille leurs éléments et états. Les
-styles de base s'appliquent globalement à la page : vérifier leur compatibilité
-avec les styles de l'application.
+styles de base sont facultatifs : les activer avec `class="nz-base"` sur `<body>`.
+Sans cette classe, `typography.css` ne modifie pas les éléments de la page.
+Les liens ordinaires conservent leur style natif ; les styles des composants sont ciblés.
 
 Le script applique `data-theme="light"` ou `"dark"` sur `<html>` avant
 l'affichage. Sans choix enregistré, il suit `prefers-color-scheme`, y compris

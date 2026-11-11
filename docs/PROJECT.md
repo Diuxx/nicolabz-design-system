@@ -87,13 +87,13 @@ The design system maintains a centralized component catalog:
 
 ## Demo Maintenance
 
-`demo/demo.html` is the reference showcase for the design system.
+`demo/index.html` is the reference showcase for the design system.
 
 It must accurately reflect the current components, themes, and supported behaviors.
 
 ### Rules
 
-- Update `demo/demo.html` whenever a change affects the design system's visual appearance, components, variants, or interactions.
+- Update `demo/index.html` whenever a change affects the design system's visual appearance, components, variants, or interactions.
 - Demonstrate new components and variants when they are introduced.
 - Update or remove examples when components are modified or deprecated.
 - Ensure all examples use existing design tokens and component styles.

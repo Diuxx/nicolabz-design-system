@@ -8,6 +8,7 @@
   --color-text: #17191c;
   --color-text-secondary: #656b6b;
   --color-border: #e2e5e1;
+  --color-control-border: #858f88;
   --color-accent: #455e50;
   --color-accent-contrast: #ffffff;
   --color-button: #17191c;
@@ -41,6 +42,7 @@
   --color-text: #edf1ed;
   --color-text-secondary: #a0aba2;
   --color-border: #343e37;
+  --color-control-border: #778c7b;
   --color-accent: #a5bda9;
   --color-accent-contrast: #111513;
   --color-button: #a5bda9;

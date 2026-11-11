@@ -1,3 +1,5 @@
+html { scroll-behavior: smooth; }
+
 .skip-link {
   position: absolute;
   z-index: 10;
@@ -7,6 +9,7 @@
   border-radius: var(--radius-sm);
   background: var(--color-surface);
   color: var(--color-text);
+  text-decoration: none;
 }
 
 .skip-link:focus {
@@ -82,6 +85,8 @@
   font-weight: 700;
   letter-spacing: -0.5px;
   white-space: nowrap;
+  color: var(--color-text);
+  text-decoration: none;
 }
 
 .brand-mark,
@@ -538,3 +543,5 @@
     flex-direction: column;
   }
 }
+
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
