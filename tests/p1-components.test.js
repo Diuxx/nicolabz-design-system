@@ -33,6 +33,26 @@ test("les états accessibles sont présents dans le CSS et la galerie", () => {
   assert.match(demoHtml, /disabled aria-busy="true"/);
 });
 
+test("le select natif a un chevron thématique et des états visuels dédiés", () => {
+  assert.match(componentsCss, /\.nz-form-panel select,\s*\.form-panel select\s*\{[^}]*appearance:\s*none;/);
+  assert.match(componentsCss, /padding-right:\s*calc\(var\(--space-8\)\s*\+\s*var\(--space-2\)\)/);
+  assert.match(componentsCss, /background-size:\s*8px 8px/);
+  assert.match(componentsCss, /background-position:[\s\S]*calc\(100% - 18px\) 50%,\s*calc\(100% - 10px\) 50%/);
+  assert.match(componentsCss, /\.nz-form-panel select:hover:enabled[\s\S]*?border-color:\s*var\(--color-accent\)/);
+  assert.match(demoHtml, /<select id="example-role"/);
+  assert.match(demoHtml, /Menu harmonisé dans les navigateurs compatibles, natif ailleurs/);
+});
+
+test("le picker select est stylisé progressivement sans remplacer le contrôle natif", () => {
+  assert.match(componentsCss, /@supports \(appearance:\s*base-select\)/);
+  assert.match(componentsCss, /\.nz-form-panel select::picker\(select\),\s*\.form-panel select::picker\(select\)\s*\{[^}]*margin-top:\s*var\(--space-2\)/);
+  assert.match(componentsCss, /select::picker-icon,[\s\S]*?display:\s*none/);
+  assert.match(componentsCss, /border-radius:\s*var\(--radius-md\);[\s\S]*background:\s*var\(--color-surface\);[\s\S]*box-shadow:\s*0 8px 24px rgb\(0 0 0 \/ 10%\)/);
+  assert.match(componentsCss, /select option:hover[\s\S]*?select option:checked[\s\S]*?background:\s*var\(--color-surface-muted\)/);
+  assert.match(demoHtml, /Menu harmonisé dans les navigateurs compatibles, natif ailleurs/);
+  assert.match(demoHtml, /<select id="example-role"/);
+});
+
 test("la décoration est réutilisable et non dupliquée dans la démo", () => {
   assert.match(demoHtml, /src\/styles\/decorations\.css/);
   assert.match(demoHtml, /class="nz-spectrum spectrum-art" aria-hidden="true"/);

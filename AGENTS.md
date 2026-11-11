@@ -66,27 +66,45 @@ Optimize for human understanding, not code brevity or sophistication.
 
 ## Documentation
 
-Every project must maintain a clear and concise `README.md` at its root.
+All project documentation MUST be written in **English**.
 
-The README must include:
+### README.md
 
-1. **Overview** — Briefly describe the project's purpose and main features.
-2. **Tech Stack** — List the main languages, frameworks, and technologies used.
-3. **Prerequisites** — Specify required tools, runtimes, and versions.
-4. **Installation** — Provide the commands needed to install dependencies and configure the project.
-5. **Running** — Document the commands to start the application locally.
-6. **Testing** — Provide commands to run tests, builds, and relevant checks.
-7. **Configuration** — Describe required environment variables and configuration files without exposing secrets.
+Every project must maintain a short, clear, and welcoming `README.md` at its root.
+
+The README is a **project overview, not a technical manual**.
+
+It should include:
+
+1. **Introduction** — Project name, purpose, and a brief description.
+2. **Features** — Main capabilities, summarized in a few bullet points.
+3. **Quick Start** — Minimal commands to get started, only when relevant.
+4. **Documentation** — A link to [`docs/USAGE.md`](docs/USAGE.md).
+
+### docs/USAGE.md
+
+Keep detailed technical documentation in `docs/USAGE.md`, including when applicable:
+
+- Prerequisites and installation.
+- Configuration and environment variables.
+- Usage examples and integration instructions.
+- Development, build, and testing commands.
+- Architecture details necessary for users.
+- Troubleshooting and known limitations.
 
 ### Rules
 
-- Keep instructions concise, accurate, and easy to follow.
-- Use executable commands in code blocks.
-- Document only features and commands that actually exist.
-- Prefer the simplest setup that works.
-- Update the README when technologies, setup steps, commands, or configuration change.
-- Avoid duplicating detailed documentation already available elsewhere; link to it instead.
-- Omit sections that do not apply to the project.
+- Write all documentation in English.
+- Keep the README concise and focused on what the project offers.
+- Avoid implementation details, architecture breakdowns, and long instructions in the README.
+- Do not list internal Markdown files or explain the documentation structure in the README.
+- Link to `docs/USAGE.md` for detailed instructions.
+- Avoid duplication between README and USAGE.
+- Document only implemented features and verified commands.
+- Keep documentation synchronized with actual project behavior.
+- Use clear headings, simple language, and executable examples.
+- Create or update `docs/USAGE.md` when technical instructions change.
+- Omit irrelevant sections rather than adding empty placeholders.
 
 ## Documentation Policy
 

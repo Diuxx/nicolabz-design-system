@@ -17,7 +17,7 @@
       "buttonText": "#FFFFFF",
       "success": "#3E7855",
       "successSurface": "#EAF3EA",
-      "focus": "#477BBA",
+      "focus": "#455E50",
       "art": {
         "lavender": "#D7C7F5",
         "blue": "#B9DDE8",
@@ -42,7 +42,7 @@
       "buttonText": "#111513",
       "success": "#A5BDA9",
       "successSurface": "#26372C",
-      "focus": "#A4C8FF",
+      "focus": "#A5BDA9",
       "art": {
         "lavender": "#526052",
         "blue": "#405C57",

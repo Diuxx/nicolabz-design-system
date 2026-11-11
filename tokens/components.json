@@ -46,7 +46,7 @@
     },
     {
       "name": "Form Panel",
-      "description": "Scoped form styling for labels, inputs, and selects.",
+      "description": "Scoped form styling with a theme-aware chevron and a progressively styled native select picker.",
       "selector": ".nz-form-panel",
       "elements": {
         "label": ".nz-form-panel label",

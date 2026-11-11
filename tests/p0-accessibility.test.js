@@ -25,6 +25,8 @@ test('bordures et placeholders contrastés en clair et sombre', () => {
   for (const [name, theme] of Object.entries(palette.themes)) {
     assert.ok(contrast(theme.controlBorder, theme.background) >= 3, name + ': bordure < 3:1');
     assert.ok(contrast(theme.textSecondary, theme.background) >= 4.5, name + ': placeholder < 4.5:1');
+    assert.equal(theme.focus, theme.accent, name + ': le focus doit suivre la couleur accent');
+    assert.ok(contrast(theme.focus, theme.background) >= 3, name + ': focus < 3:1');
   }
   assert.match(componentsCss, /border(?:-color)?:\s*(?:1px solid )?var\(--color-control-border\)/);
   assert.match(componentsCss, /opacity:\s*1;/);
@@ -37,4 +39,6 @@ test('les styles globaux sont opt-in, le focus reste ciblé', () => {
   assert.doesNotMatch(baseCss, /^:focus-visible\s*\{/m);
   assert.match(componentsCss, /\.button:focus-visible/);
   assert.match(componentsCss, /\.form-panel input:focus-visible:enabled/);
+  assert.match(componentsCss, /outline:\s*none;\s*box-shadow:\s*inset 0 0 0 1px var\(--color-accent\);/);
+  assert.match(componentsCss, /input\[aria-invalid="true"\]:focus-visible:enabled[\s\S]*?box-shadow:\s*inset 0 0 0 1px var\(--color-error\);/);
 });
