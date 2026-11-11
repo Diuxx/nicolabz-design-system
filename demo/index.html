@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="../src/styles/theme.css" />
     <link rel="stylesheet" href="../src/styles/typography.css" />
     <link rel="stylesheet" href="../src/styles/components.css" />
+    <link rel="stylesheet" href="../src/styles/decorations.css" />
     <link rel="stylesheet" href="demo.css" />
     <script src="demo.js" defer></script>
   </head>
@@ -17,8 +18,8 @@
     <a class="skip-link" href="#main-content">Aller au contenu</a>
     <div class="gallery-shell">
       <!-- Decorative background shared by the entire page, outside content sections. -->
-      <div class="spectrum-art" aria-hidden="true">
-        <div class="spectrum-art__shape"></div>
+      <div class="nz-spectrum spectrum-art" aria-hidden="true">
+        <div class="nz-spectrum__shape"></div>
       </div>
       <aside class="sidebar" aria-label="Navigation du design system">
         <a class="brand" href="#overview" aria-label="Nicolabz Design System, accueil">
@@ -28,11 +29,11 @@
         <p class="sidebar-caption">DESIGN SYSTEM <span>·</span> UI LIBRARY</p>
         <nav aria-label="Sections de la bibliothèque">
           <p class="sidebar-heading">FONDATIONS</p>
-          <ul class="nav-list gallery-nav">
+          <ul class="nz-nav-list gallery-nav">
             <li><a href="#overview">Vue d'ensemble</a></li>
           </ul>
           <p class="sidebar-heading">COMPOSANTS</p>
-          <ul class="nav-list gallery-nav">
+          <ul class="nz-nav-list gallery-nav">
             <li><a href="#actions">Actions</a></li>
             <li><a href="#forms">Formulaires</a></li>
             <li><a href="#containers">Conteneurs</a></li>
@@ -46,7 +47,7 @@
       <div class="workspace">
         <header class="topbar">
           <p class="breadcrumb"><span>Bibliothèque</span><span aria-hidden="true">/</span> Composants</p>
-          <button class="button button-secondary theme-toggle" type="button" data-theme-toggle aria-label="Activer le thème sombre" aria-pressed="false">
+          <button class="nz-button nz-button-secondary theme-toggle" type="button" data-theme-toggle aria-label="Activer le thème sombre" aria-pressed="false">
             <span data-theme-icon aria-hidden="true">☾</span>
             <span data-theme-label>Mode sombre</span>
           </button>
@@ -69,21 +70,23 @@
               <div><p class="eyebrow">01 / ACTIONS</p><h2 id="actions-title">Boutons</h2></div>
               <p>Actions primaires et secondaires avec retour au survol et focus clavier.</p>
             </header>
-            <article id="buttons" class="story-card panel" data-story="buttons" aria-labelledby="buttons-title">
+            <article id="buttons" class="story-card nz-panel" data-story="buttons" aria-labelledby="buttons-title">
               <div class="story-heading">
                 <div><h3 id="buttons-title">Button</h3><p>Élément interactif pour déclencher ou poursuivre une action.</p></div>
-                <code class="selector-chip">.button</code>
+                <code class="selector-chip">.nz-button</code>
               </div>
               <div class="story-preview" data-preview="buttons" aria-label="Aperçu des variantes de bouton"></div>
-              <p class="state-note"><strong>Variantes</strong> Primary · Secondary <span aria-hidden="true">/</span> <strong>États</strong> Hover · Focus clavier</p>
+              <p class="state-note"><strong>Variantes</strong> Primary · Secondary <span aria-hidden="true">/</span> <strong>États</strong> Hover · Focus clavier · Disabled · Loading</p>
               <details class="code-details">
                 <summary>Exemple HTML</summary>
-                <div class="code-toolbar"><button class="button button-secondary copy-button" type="button" data-copy>Copier le code</button><span data-copy-status aria-live="polite"></span></div>
+                <div class="code-toolbar"><button class="nz-button nz-button-secondary copy-button" type="button" data-copy>Copier le code</button><span data-copy-status aria-live="polite"></span></div>
                 <pre><code data-code></code></pre>
               </details>
               <template data-example="buttons">
-                <button class="button button-primary" type="button">Action principale</button>
-                <button class="button button-secondary" type="button">Action secondaire</button>
+                <button class="nz-button nz-button-primary" type="button">Action principale</button>
+                <button class="nz-button nz-button-secondary" type="button">Action secondaire</button>
+                <button class="nz-button nz-button-primary" type="button" disabled>Indisponible</button>
+                <button class="nz-button nz-button-primary" type="button" disabled aria-busy="true">Chargement…</button>
               </template>
             </article>
           </section>
@@ -93,20 +96,20 @@
               <div><p class="eyebrow">02 / SAISIE</p><h2 id="forms-title">Formulaires</h2></div>
               <p>Libellés et contrôles natifs dans un conteneur de formulaire cohérent.</p>
             </header>
-            <article id="form-panel-component" class="story-card panel" data-story="forms" aria-labelledby="form-panel-title">
+            <article id="form-panel-component" class="story-card nz-panel" data-story="forms" aria-labelledby="form-panel-title">
               <div class="story-heading">
                 <div><h3 id="form-panel-title">Form Panel</h3><p>Styles ciblés pour les champs texte, listes, zones de texte et cases à cocher.</p></div>
-                <code class="selector-chip">.form-panel</code>
+                <code class="selector-chip">.nz-form-panel</code>
               </div>
               <div class="story-preview story-preview-form" data-preview="forms" aria-label="Aperçu des contrôles de formulaire"></div>
-              <p class="state-note"><strong>Éléments</strong> Label · Input · Select · Textarea <span aria-hidden="true">/</span> <strong>États</strong> Focus · Focus clavier</p>
+              <p class="state-note"><strong>Éléments</strong> Label · Input · Select · Textarea <span aria-hidden="true">/</span> <strong>États</strong> Focus · Disabled · Readonly · Invalid</p>
               <details class="code-details">
                 <summary>Exemple HTML</summary>
-                <div class="code-toolbar"><button class="button button-secondary copy-button" type="button" data-copy>Copier le code</button><span data-copy-status aria-live="polite"></span></div>
+                <div class="code-toolbar"><button class="nz-button nz-button-secondary copy-button" type="button" data-copy>Copier le code</button><span data-copy-status aria-live="polite"></span></div>
                 <pre><code data-code></code></pre>
               </details>
               <template data-example="forms">
-                <form id="demo-form" class="form-panel">
+                <form id="demo-form" class="nz-form-panel">
                   <label for="example-name">Nom</label>
                   <input id="example-name" name="name" type="text" placeholder="Ton nom" required maxlength="80" />
                   <label for="example-role">Rôle</label>
@@ -116,8 +119,15 @@
                   </select>
                   <label for="example-message">Message</label>
                   <textarea id="example-message" name="message" placeholder="Quelques mots..."></textarea>
+                  <label for="example-readonly">Lecture seule</label>
+                  <input id="example-readonly" type="text" value="Valeur non modifiable" readonly />
+                  <label for="example-disabled">Champ désactivé</label>
+                  <input id="example-disabled" type="text" value="Indisponible" disabled />
+                  <label for="example-invalid">Champ en erreur</label>
+                  <input id="example-invalid" type="text" value="Valeur incorrecte" aria-invalid="true" aria-describedby="example-invalid-error" />
+                  <p id="example-invalid-error" class="nz-field-error">Corrige cette valeur avant de poursuivre.</p>
                   <label for="example-updates"><input id="example-updates" name="updates" type="checkbox" /> Recevoir les nouvelles</label>
-                  <button class="button button-primary" type="submit">Créer un brouillon</button>
+                  <button class="nz-button nz-button-primary" type="submit">Créer un brouillon</button>
                   <p id="form-feedback" class="form-feedback" role="status" aria-live="polite">Démo locale, aucune donnée envoyée.</p>
                 </form>
               </template>
@@ -129,21 +139,21 @@
               <div><p class="eyebrow">03 / STRUCTURE</p><h2 id="containers-title">Conteneurs</h2></div>
               <p>Surfaces pour regrouper du contenu avec différents niveaux de contraste.</p>
             </header>
-            <article id="panels" class="story-card panel" data-story="containers" aria-labelledby="panels-title">
+            <article id="panels" class="story-card nz-panel" data-story="containers" aria-labelledby="panels-title">
               <div class="story-heading">
                 <div><h3 id="panels-title">Panel</h3><p>Conteneur simple avec surface, bordure et rayon sémantique.</p></div>
-                <code class="selector-chip">.panel</code>
+                <code class="selector-chip">.nz-panel</code>
               </div>
               <div class="story-preview" data-preview="containers" aria-label="Aperçu des variantes de panneau"></div>
               <p class="state-note"><strong>Variantes</strong> Default · Muted <span aria-hidden="true">/</span> Aucun état interactif</p>
               <details class="code-details">
                 <summary>Exemple HTML</summary>
-                <div class="code-toolbar"><button class="button button-secondary copy-button" type="button" data-copy>Copier le code</button><span data-copy-status aria-live="polite"></span></div>
+                <div class="code-toolbar"><button class="nz-button nz-button-secondary copy-button" type="button" data-copy>Copier le code</button><span data-copy-status aria-live="polite"></span></div>
                 <pre><code data-code></code></pre>
               </details>
               <template data-example="containers">
-                <div class="panel">Surface standard</div>
-                <div class="panel panel-muted">Surface atténuée</div>
+                <div class="nz-panel">Surface standard</div>
+                <div class="nz-panel nz-panel-muted">Surface atténuée</div>
               </template>
             </article>
           </section>
@@ -153,23 +163,23 @@
               <div><p class="eyebrow">04 / STATUT</p><h2 id="indicators-title">Indicateurs</h2></div>
               <p>Badges pour un statut concis et tags pour classer le contenu.</p>
             </header>
-            <article id="badges-tags" class="story-card panel" data-story="indicators" aria-labelledby="badges-title">
+            <article id="badges-tags" class="story-card nz-panel" data-story="indicators" aria-labelledby="badges-title">
               <div class="story-heading">
                 <div><h3 id="badges-title">Badge &amp; Tag</h3><p>Indicateurs compacts, sans interaction, qui héritent des couleurs du thème.</p></div>
-                <code class="selector-chip">.badge · .tag</code>
+                <code class="selector-chip">.nz-badge · .nz-tag</code>
               </div>
               <div class="story-preview" data-preview="indicators" aria-label="Aperçu des badges et tags"></div>
               <p class="state-note"><strong>Badge</strong> Default · Success <span aria-hidden="true">/</span> <strong>Tag</strong> Default</p>
               <details class="code-details">
                 <summary>Exemple HTML</summary>
-                <div class="code-toolbar"><button class="button button-secondary copy-button" type="button" data-copy>Copier le code</button><span data-copy-status aria-live="polite"></span></div>
+                <div class="code-toolbar"><button class="nz-button nz-button-secondary copy-button" type="button" data-copy>Copier le code</button><span data-copy-status aria-live="polite"></span></div>
                 <pre><code data-code></code></pre>
               </details>
               <template data-example="indicators">
-                <span class="badge">En attente</span>
-                <span class="badge badge-success">En ligne</span>
-                <span class="tag">Documentation</span>
-                <span class="tag">Version 1.0</span>
+                <span class="nz-badge">En attente</span>
+                <span class="nz-badge nz-badge-success">En ligne</span>
+                <span class="nz-tag">Documentation</span>
+                <span class="nz-tag">Version 1.0</span>
               </template>
             </article>
           </section>
@@ -179,21 +189,21 @@
               <div><p class="eyebrow">05 / ORIENTATION</p><h2 id="navigation-title">Navigation</h2></div>
               <p>Liens verticaux avec traitement du survol et indication de page courante.</p>
             </header>
-            <article id="navigation-list" class="story-card panel" data-story="navigation" aria-labelledby="navigation-list-title">
+            <article id="navigation-list" class="story-card nz-panel" data-story="navigation" aria-labelledby="navigation-list-title">
               <div class="story-heading">
                 <div><h3 id="navigation-list-title">Navigation List</h3><p>Liste de liens sémantique adaptée aux menus de section.</p></div>
-                <code class="selector-chip">.nav-list</code>
+                <code class="selector-chip">.nz-nav-list</code>
               </div>
               <div class="story-preview story-preview-navigation" data-preview="navigation" aria-label="Aperçu de la liste de navigation"></div>
               <p class="state-note"><strong>États</strong> Hover · Focus clavier · Page courante (<code>aria-current</code>)</p>
               <details class="code-details">
                 <summary>Exemple HTML</summary>
-                <div class="code-toolbar"><button class="button button-secondary copy-button" type="button" data-copy>Copier le code</button><span data-copy-status aria-live="polite"></span></div>
+                <div class="code-toolbar"><button class="nz-button nz-button-secondary copy-button" type="button" data-copy>Copier le code</button><span data-copy-status aria-live="polite"></span></div>
                 <pre><code data-code></code></pre>
               </details>
               <template data-example="navigation">
                 <nav aria-label="Navigation de compte">
-                  <ul class="nav-list">
+                  <ul class="nz-nav-list">
                     <li><a href="#overview" aria-current="page">Vue d'ensemble</a></li>
                     <li><a href="#forms">Préférences</a></li>
                     <li><a href="#indicators">Notifications</a></li>

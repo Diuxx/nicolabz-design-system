@@ -31,3 +31,13 @@ clair/sombre et d'une galerie de composants interactive.
 - Synchroniser catalogue, styles partagés et démonstration lorsqu'un composant,
   une variante ou un état évolue.
 - Garder les exemples accessibles, responsive et sans dépendances externes.
+
+## Évolutions P1
+
+- Les composants CSS et le catalogue utilisent les sélecteurs publics `nz-*`;
+  les anciens sélecteurs restent des alias transitoires.
+- `src/styles/decorations.css` fournit la forme Soft Spectrum réutilisable ;
+  la galerie ne conserve que son placement.
+- Les espacements courants utilisent les tokens `--space-*` et les
+  boutons / champs exposent les états désactivé, chargement, erreur et lecture seule.
+- `tests/p1-components.test.js` vérifie les sélecteurs, états et la décoration.

@@ -1,70 +1,84 @@
-
 {
-  "version": "0.2.0",
+  "version": "0.3.0",
   "source": "src/styles/components.css",
   "components": [
     {
       "name": "Button",
       "description": "Interactive element for user actions.",
-      "selector": ".button",
+      "selector": ".nz-button",
       "variants": {
-        "primary": ".button-primary",
-        "secondary": ".button-secondary"
+        "primary": ".nz-button-primary",
+        "secondary": ".nz-button-secondary"
       },
-      "states": ["hover", "focus-visible"],
-      "usage": "Combine .button with a variant class."
+      "states": [
+        "hover",
+        "focus-visible",
+        "disabled",
+        "loading"
+      ],
+      "usage": "Combine .nz-button with .nz-button-primary or .nz-button-secondary. Use disabled to prevent actions, aria-busy=\"true\" with a visible progress label for loading."
     },
     {
       "name": "Panel",
       "description": "Container for grouping related content.",
-      "selector": ".panel",
+      "selector": ".nz-panel",
       "variants": {
-        "muted": ".panel-muted"
+        "muted": ".nz-panel-muted"
       },
       "states": []
     },
     {
       "name": "Badge",
       "description": "Compact status or information indicator.",
-      "selector": ".badge",
+      "selector": ".nz-badge",
       "variants": {
-        "success": ".badge-success"
+        "success": ".nz-badge-success"
       },
       "states": [],
-      "usage": "Combine .badge with .badge-success for success states."
+      "usage": "Combine .nz-badge with .nz-badge-success for positive status."
     },
     {
       "name": "Tag",
       "description": "Small label for categorizing content.",
-      "selector": ".tag",
+      "selector": ".nz-tag",
       "variants": {},
       "states": []
     },
     {
       "name": "Form Panel",
       "description": "Scoped form styling for labels, inputs, and selects.",
-      "selector": ".form-panel",
+      "selector": ".nz-form-panel",
       "elements": {
-        "label": ".form-panel label",
-        "input": ".form-panel input",
-        "select": ".form-panel select",
-        "textarea": ".form-panel textarea",
-        "button": ".form-panel button"
+        "label": ".nz-form-panel label",
+        "input": ".nz-form-panel input",
+        "select": ".nz-form-panel select",
+        "textarea": ".nz-form-panel textarea",
+        "button": ".nz-form-panel button"
       },
-      "states": ["focus", "focus-visible"],
+      "states": [
+        "focus",
+        "focus-visible",
+        "disabled",
+        "readonly",
+        "invalid"
+      ],
       "variants": {},
-      "usage": "Apply .form-panel to a parent container."
+      "usage": "Use .nz-form-panel; associate labels using for/id. For errors set aria-invalid=\"true\" and aria-describedby to a .nz-field-error element."
     },
     {
       "name": "Navigation List",
       "description": "Vertical list of links with hover and current-page styling.",
-      "selector": ".nav-list",
+      "selector": ".nz-nav-list",
       "elements": {
-        "link": ".nav-list a"
+        "link": ".nz-nav-list a"
       },
-      "states": ["hover", "focus-visible", "current"],
+      "states": [
+        "hover",
+        "focus-visible",
+        "current"
+      ],
       "variants": {},
-      "usage": "Use semantic navigation markup and aria-current=\"page\" for the current page."
+      "usage": "Use .nz-nav-list with semantic navigation markup and aria-current=\"page\" for the current page."
     }
   ]
 }

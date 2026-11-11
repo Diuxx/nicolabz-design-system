@@ -10,7 +10,7 @@ const componentCatalog = require("../tokens/components.json");
 const componentStyles = fs.readFileSync(path.join(__dirname, "..", "src", "styles", "components.css"), "utf8");
 const baseStyles = fs.readFileSync(path.join(__dirname, "..", "src", "styles", "typography.css"), "utf8");
 const demoMarkup = fs.readFileSync(path.join(__dirname, "..", "demo", "index.html"), "utf8");
-const demoStyles = fs.readFileSync(path.join(__dirname, "..", "demo", "demo.css"), "utf8");
+const decorationStyles = fs.readFileSync(path.join(__dirname, "..", "src", "styles", "decorations.css"), "utf8");
 
 test("génère tous les tokens des deux thèmes de manière déterministe", () => {
   const css = generate(palette);
@@ -80,7 +80,11 @@ test("le catalogue décrit les composants CSS effectivement présentés dans la 
         hover: selectors.some((selector) => selector.includes(":hover") && selector.startsWith(component.selector)),
         "focus-visible": allStyles.includes(":focus-visible"),
         focus: allStyles.includes(":focus:enabled"),
-        current: allStyles.includes('[aria-current="page"]')
+        current: allStyles.includes('[aria-current="page"]'),
+        disabled: selectors.some((selector) => selector.startsWith(component.selector) && selector.includes(":disabled")),
+        loading: selectors.some((selector) => selector.startsWith(component.selector) && selector.includes('[aria-busy="true"]')),
+        readonly: selectors.some((selector) => selector.startsWith(component.selector) && selector.includes(":read-only")),
+        invalid: selectors.some((selector) => selector.startsWith(component.selector) && selector.includes('[aria-invalid="true"]'))
       }[state];
       assert.equal(stateIsImplemented, true, `${component.selector} doit implémenter l'état ${state}`);
     }
@@ -88,11 +92,11 @@ test("le catalogue décrit les composants CSS effectivement présentés dans la 
 });
 
 test("la décoration de la démo utilise les tokens de palette et reste non sémantique", () => {
-  assert.match(demoMarkup, /<div class="spectrum-art" aria-hidden="true">/);
-  assert.match(demoStyles, /opacity:\s*var\(--art-opacity\)/);
-  assert.match(demoStyles, /filter:\s*blur\(var\(--art-blur\)\)/);
+  assert.match(demoMarkup, /<div class="nz-spectrum spectrum-art" aria-hidden="true">/);
+  assert.match(decorationStyles, /opacity:\s*var\(--art-opacity\)/);
+  assert.match(decorationStyles, /filter:\s*blur\(var\(--art-blur\)\)/);
   for (const color of ["lavender", "blue", "peach", "mint"]) {
-    assert.ok(demoStyles.includes(`var(--color-art-${color})`));
+    assert.ok(decorationStyles.includes(`var(--color-art-${color})`));
   }
 });
 

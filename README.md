@@ -52,6 +52,8 @@ cohérence du catalogue de composants avec les styles et la démonstration.
   focus et réduction des animations.
 - [src/styles/components.css](src/styles/components.css) : composants CSS
   réutilisables.
+- [src/styles/decorations.css](src/styles/decorations.css) : forme Soft Spectrum facultative,
+  utilisable dans n’importe quelle application.
 - [src/theme.js](src/theme.js) : gestion du thème indépendante de la démo.
 - [demo/index.html](demo/index.html) et [demo/demo.css](demo/demo.css) :
   galerie responsive avec navigation latérale, aperçus interactifs, thèmes et
@@ -98,6 +100,10 @@ les composants et le script sont facultatifs. Les composants actuels incluent no
 `form-panel` et `nav-list`. Le catalogue détaille leurs éléments et états. Les
 styles de base sont facultatifs : les activer avec `class="nz-base"` sur `<body>`.
 Sans cette classe, `typography.css` ne modifie pas les éléments de la page.
+Les classes publiques commencent désormais par `nz-` (exemple : `nz-button`,
+`nz-button-primary`, `nz-form-panel`). Les anciennes classes (`button`,
+`button-primary`, `form-panel`, etc.) restent prises en charge comme alias de
+compatibilité. Utiliser uniquement les nouvelles classes dans les nouveaux projets.
 Les liens ordinaires conservent leur style natif ; les styles des composants sont ciblés.
 
 Le script applique `data-theme="light"` ou `"dark"` sur `<html>` avant
@@ -110,9 +116,17 @@ et `toggle()`. À chaque application, l'événement `nicolabz-theme-change` est
 propres contrôles et libellés accessibles.
 
 Sans script, le thème clair est utilisé par défaut ; l'application peut aussi
-définir elle-même `data-theme` sur `<html>`. La forme multicolore et son
-positionnement appartiennent à la démonstration : ses couches placent la
-décoration derrière le contenu. Les animations respectent
+définir elle-même `data-theme` sur `<html>`. La forme multicolore est désormais réutilisable avec `decorations.css` :
+
+```html
+<div class="nz-spectrum" aria-hidden="true">
+  <div class="nz-spectrum__shape"></div>
+</div>
+```
+
+Placer la forme dans un conteneur `position: relative; isolation: isolate`,
+avec le contenu au-dessus (`z-index: 1`). Le positionnement précis reste propre à
+chaque application. L'ancienne classe `spectrum-art` reste compatible. Les animations respectent
 `prefers-reduced-motion`.
 
 ## Intégration Angular
@@ -136,3 +150,10 @@ base de l'application. Les styles métier restent dans celle-ci.
 - Le formulaire est une démonstration locale sans backend.
 - Les tests automatisés couvrent les tokens ; ils ne remplacent pas un audit
   complet d'accessibilité et de compatibilité des navigateurs.
+
+## États des composants
+
+- Les boutons prennent en charge `disabled` et `aria-busy="true"` avec un libellé de chargement.
+- Les formulaires prennent en charge `disabled`, `readonly` (saisie texte)
+  et `aria-invalid="true"` accompagné d'un message relié par `aria-describedby`.
+- Les marges et espacements récurrents utilisent les tokens `--space-*`.

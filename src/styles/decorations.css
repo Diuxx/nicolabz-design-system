@@ -1,0 +1,44 @@
+/* Decoration non interactive. Le conteneur parent doit isoler son empilement. */
+.nz-spectrum,
+.spectrum-art {
+  position: absolute;
+  z-index: 0;
+  width: min(820px, 85vw);
+  height: min(820px, 100vh);
+  pointer-events: none;
+  opacity: var(--art-opacity);
+  filter: blur(var(--art-blur));
+  transition: opacity 300ms, filter 300ms;
+}
+
+.nz-spectrum__shape,
+.spectrum-art__shape,
+.nz-spectrum::after,
+.spectrum-art::after {
+  position: absolute;
+  inset: 0;
+  display: block;
+  border-radius: 53% 47% 62% 38% / 42% 56% 44% 58%;
+  background:
+    radial-gradient(ellipse at 30% 27%, var(--color-art-lavender) 0%, transparent 45%),
+    radial-gradient(ellipse at 76% 34%, var(--color-art-blue) 0%, transparent 52%),
+    radial-gradient(ellipse at 70% 78%, var(--color-art-mint) 0%, transparent 48%),
+    radial-gradient(ellipse at 26% 75%, var(--color-art-peach) 0%, transparent 52%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 73%);
+  mask-image: radial-gradient(ellipse at center, black 40%, transparent 73%);
+  content: "";
+  transform: rotate(-22deg);
+}
+
+.nz-spectrum::after,
+.spectrum-art::after {
+  inset: auto 6% -26% 12%;
+  height: 56%;
+  border-radius: 46% 54% 39% 61% / 49% 38% 62% 51%;
+  opacity: 0.78;
+  transform: rotate(-10deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nz-spectrum, .spectrum-art { transition: none; }
+}

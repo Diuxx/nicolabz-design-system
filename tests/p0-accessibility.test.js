@@ -26,7 +26,7 @@ test('bordures et placeholders contrastés en clair et sombre', () => {
     assert.ok(contrast(theme.controlBorder, theme.background) >= 3, name + ': bordure < 3:1');
     assert.ok(contrast(theme.textSecondary, theme.background) >= 4.5, name + ': placeholder < 4.5:1');
   }
-  assert.match(componentsCss, /border-color:\s*var\(--color-control-border\)/);
+  assert.match(componentsCss, /border(?:-color)?:\s*(?:1px solid )?var\(--color-control-border\)/);
   assert.match(componentsCss, /opacity:\s*1;/);
 });
 
