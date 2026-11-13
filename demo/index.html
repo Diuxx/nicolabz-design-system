@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="../src/styles/theme.css" />
     <link rel="stylesheet" href="../src/styles/typography.css" />
     <link rel="stylesheet" href="../src/styles/components.css" />
+    <link rel="stylesheet" href="../src/styles/icons.css" />
     <link rel="stylesheet" href="../src/styles/decorations.css" />
     <link rel="stylesheet" href="demo.css" />
     <script src="demo.js" defer></script>
@@ -31,6 +32,7 @@
           <p class="sidebar-heading">FONDATIONS</p>
           <ul class="nz-nav-list gallery-nav">
             <li><a href="#overview">Vue d'ensemble</a></li>
+            <li><a href="#icons">Icônes</a></li>
           </ul>
           <p class="sidebar-heading">COMPOSANTS</p>
           <ul class="nz-nav-list gallery-nav">
@@ -60,14 +62,148 @@
             <p class="intro-copy">Des éléments sobres, accessibles et réutilisables. Explore les aperçus, teste leurs états au clavier et copie le HTML pour les intégrer.</p>
             <div class="intro-meta">
               <span><span class="meta-dot"></span> Thèmes clair et sombre</span>
-              <span>Sans dépendance</span>
+              <span>Sans dépendance à l'exécution</span>
               <span>HTML · CSS · JavaScript</span>
             </div>
           </section>
 
+          <section id="icons" class="category-section" aria-labelledby="icons-title">
+            <header class="category-heading">
+              <div><p class="eyebrow">01 / FONDATIONS</p><h2 id="icons-title">Icônes</h2></div>
+              <p>Une sélection d'icônes SVG Lucide, réutilisables sans JavaScript d'exécution et adaptées aux deux thèmes.</p>
+            </header>
+            <article id="icon-library" class="story-card nz-panel" data-story="icons" aria-labelledby="icon-library-title">
+              <div class="story-heading">
+                <div><h3 id="icon-library-title">Lucide Icon Library</h3><p>Le sprite statique est référencé directement avec SVG <code>&lt;use&gt;</code>. Les exemples décoratifs sont masqués aux lecteurs d'écran.</p></div>
+                <code class="selector-chip">.nz-icon</code>
+              </div>
+              <div class="story-preview icon-preview" data-preview="icons" aria-label="Galerie des icônes Lucide"></div>
+              <p class="state-note"><strong>Tailles</strong> Small · 16 px / Default · 20 px / Large · 24 px <span aria-hidden="true">/</span> <strong>Couleur</strong> Héritée de currentColor</p>
+              <details class="code-details">
+                <summary>Exemple HTML copiable</summary>
+                <div class="code-toolbar"><button class="nz-button nz-button-secondary copy-button" type="button" data-copy>Copier le code</button><span data-copy-status aria-live="polite"></span></div>
+                <pre><code data-code></code></pre>
+              </details>
+              <template data-example="icons">
+                <div class="icon-grid">
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#activity"></use></svg><code>activity</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#arrow-down"></use></svg><code>arrow-down</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#arrow-left"></use></svg><code>arrow-left</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#arrow-right"></use></svg><code>arrow-right</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#arrow-up"></use></svg><code>arrow-up</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#bell"></use></svg><code>bell</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#boxes"></use></svg><code>boxes</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#braces"></use></svg><code>braces</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#briefcase-business"></use></svg><code>briefcase-business</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#bug"></use></svg><code>bug</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#building-2"></use></svg><code>building-2</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#calendar"></use></svg><code>calendar</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#calendar-check"></use></svg><code>calendar-check</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#calendar-days"></use></svg><code>calendar-days</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#chart-no-axes-combined"></use></svg><code>chart-no-axes-combined</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#chart-pie"></use></svg><code>chart-pie</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#check"></use></svg><code>check</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#chevron-down"></use></svg><code>chevron-down</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#chevron-left"></use></svg><code>chevron-left</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#chevron-right"></use></svg><code>chevron-right</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#chevron-up"></use></svg><code>chevron-up</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#circle-alert"></use></svg><code>circle-alert</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#circle-check"></use></svg><code>circle-check</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#circle-help"></use></svg><code>circle-help</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#circle-x"></use></svg><code>circle-x</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#circuit-board"></use></svg><code>circuit-board</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#clipboard"></use></svg><code>clipboard</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#clipboard-list"></use></svg><code>clipboard-list</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#clock"></use></svg><code>clock</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#cloud"></use></svg><code>cloud</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#cloud-upload"></use></svg><code>cloud-upload</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#code"></use></svg><code>code</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#code-xml"></use></svg><code>code-xml</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#container"></use></svg><code>container</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#copy"></use></svg><code>copy</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#cpu"></use></svg><code>cpu</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#database"></use></svg><code>database</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#download"></use></svg><code>download</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#ethernet-port"></use></svg><code>ethernet-port</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#external-link"></use></svg><code>external-link</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#eye"></use></svg><code>eye</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#eye-off"></use></svg><code>eye-off</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#file"></use></svg><code>file</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#file-braces"></use></svg><code>file-braces</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#file-code"></use></svg><code>file-code</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#file-spreadsheet"></use></svg><code>file-spreadsheet</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#file-text"></use></svg><code>file-text</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#filter"></use></svg><code>filter</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#flask-conical"></use></svg><code>flask-conical</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#folder"></use></svg><code>folder</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#folder-code"></use></svg><code>folder-code</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#git-branch"></use></svg><code>git-branch</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#git-merge"></use></svg><code>git-merge</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#git-pull-request"></use></svg><code>git-pull-request</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#globe"></use></svg><code>globe</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#handshake"></use></svg><code>handshake</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#hard-drive"></use></svg><code>hard-drive</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#heart"></use></svg><code>heart</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#house"></use></svg><code>house</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#info"></use></svg><code>info</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#key-round"></use></svg><code>key-round</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#laptop"></use></svg><code>laptop</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#link"></use></svg><code>link</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#loader-circle"></use></svg><code>loader-circle</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#lock"></use></svg><code>lock</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#lock-keyhole"></use></svg><code>lock-keyhole</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#mail"></use></svg><code>mail</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#memory-stick"></use></svg><code>memory-stick</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#menu"></use></svg><code>menu</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#monitor"></use></svg><code>monitor</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#moon"></use></svg><code>moon</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#network"></use></svg><code>network</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#package"></use></svg><code>package</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#pencil"></use></svg><code>pencil</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#plug"></use></svg><code>plug</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#plus"></use></svg><code>plus</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#receipt"></use></svg><code>receipt</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#refresh-cw"></use></svg><code>refresh-cw</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#rocket"></use></svg><code>rocket</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#router"></use></svg><code>router</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#search"></use></svg><code>search</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#server"></use></svg><code>server</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#server-cog"></use></svg><code>server-cog</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#settings"></use></svg><code>settings</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#shield"></use></svg><code>shield</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#shield-alert"></use></svg><code>shield-alert</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#shield-check"></use></svg><code>shield-check</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#square-pen"></use></svg><code>square-pen</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#sun"></use></svg><code>sun</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#terminal"></use></svg><code>terminal</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#trash-2"></use></svg><code>trash-2</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#upload"></use></svg><code>upload</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#user"></use></svg><code>user</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#user-cog"></use></svg><code>user-cog</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#users-round"></use></svg><code>users-round</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#wallet"></use></svg><code>wallet</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#webhook"></use></svg><code>webhook</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#wifi"></use></svg><code>wifi</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#workflow"></use></svg><code>workflow</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#wrench"></use></svg><code>wrench</code></span>
+                  <span class="icon-tile"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#x"></use></svg><code>x</code></span>
+                </div>
+                <div class="icon-sizes" aria-label="Variantes de taille">
+                  <span><svg class="nz-icon nz-icon-sm" aria-hidden="true"><use href="../src/icons/icons.svg#circle-check"></use></svg> Small · 16 px</span>
+                  <span><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#circle-check"></use></svg> Default · 20 px</span>
+                  <span><svg class="nz-icon nz-icon-lg" aria-hidden="true"><use href="../src/icons/icons.svg#circle-check"></use></svg> Large · 24 px</span>
+                </div>
+                <div class="icon-buttons">
+                  <button class="nz-button nz-button-primary" type="button"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#search"></use></svg>Rechercher</button>
+                  <button class="nz-button nz-button-secondary" type="button"><svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#download"></use></svg>Télécharger</button>
+                </div>
+              </template>
+            </article>
+          </section>
+
           <section id="actions" class="category-section" aria-labelledby="actions-title">
             <header class="category-heading">
-              <div><p class="eyebrow">01 / ACTIONS</p><h2 id="actions-title">Boutons</h2></div>
+              <div><p class="eyebrow">02 / ACTIONS</p><h2 id="actions-title">Boutons</h2></div>
               <p>Actions primaires et secondaires avec retour au survol et focus clavier.</p>
             </header>
             <article id="buttons" class="story-card nz-panel" data-story="buttons" aria-labelledby="buttons-title">
@@ -93,7 +229,7 @@
 
           <section id="forms" class="category-section" aria-labelledby="forms-title">
             <header class="category-heading">
-              <div><p class="eyebrow">02 / SAISIE</p><h2 id="forms-title">Formulaires</h2></div>
+              <div><p class="eyebrow">03 / SAISIE</p><h2 id="forms-title">Formulaires</h2></div>
               <p>Menu harmonisé dans les navigateurs compatibles, natif ailleurs.</p>
             </header>
             <article id="form-panel-component" class="story-card nz-panel" data-story="forms" aria-labelledby="form-panel-title">
@@ -136,7 +272,7 @@
 
           <section id="containers" class="category-section" aria-labelledby="containers-title">
             <header class="category-heading">
-              <div><p class="eyebrow">03 / STRUCTURE</p><h2 id="containers-title">Conteneurs</h2></div>
+              <div><p class="eyebrow">04 / STRUCTURE</p><h2 id="containers-title">Conteneurs</h2></div>
               <p>Surfaces pour regrouper du contenu avec différents niveaux de contraste.</p>
             </header>
             <article id="panels" class="story-card nz-panel" data-story="containers" aria-labelledby="panels-title">
@@ -160,7 +296,7 @@
 
           <section id="indicators" class="category-section" aria-labelledby="indicators-title">
             <header class="category-heading">
-              <div><p class="eyebrow">04 / STATUT</p><h2 id="indicators-title">Indicateurs</h2></div>
+              <div><p class="eyebrow">05 / STATUT</p><h2 id="indicators-title">Indicateurs</h2></div>
               <p>Badges pour un statut concis et tags pour classer le contenu.</p>
             </header>
             <article id="badges-tags" class="story-card nz-panel" data-story="indicators" aria-labelledby="badges-title">
@@ -186,7 +322,7 @@
 
           <section id="navigation" class="category-section" aria-labelledby="navigation-title">
             <header class="category-heading">
-              <div><p class="eyebrow">05 / ORIENTATION</p><h2 id="navigation-title">Navigation</h2></div>
+              <div><p class="eyebrow">06 / ORIENTATION</p><h2 id="navigation-title">Navigation</h2></div>
               <p>Liens verticaux avec traitement du survol et indication de page courante.</p>
             </header>
             <article id="navigation-list" class="story-card nz-panel" data-story="navigation" aria-labelledby="navigation-list-title">

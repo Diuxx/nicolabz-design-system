@@ -300,6 +300,55 @@ html { scroll-behavior: smooth; }
   display: block;
 }
 
+.icon-preview {
+  display: block;
+}
+
+.icon-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(88px, 1fr));
+  gap: var(--space-2);
+}
+
+.icon-tile {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text);
+}
+
+.icon-tile code {
+  color: var(--color-text-secondary);
+  font-size: 10px;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.icon-sizes,
+.icon-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+}
+
+.icon-sizes span {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-secondary);
+  font-size: 11px;
+}
+
 .story-preview-form > .nz-form-panel {
   width: min(100%, 500px);
 }

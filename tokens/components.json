@@ -79,6 +79,17 @@
       ],
       "variants": {},
       "usage": "Use .nz-nav-list with semantic navigation markup and aria-current=\"page\" for the current page."
+    },
+    {
+      "name": "Icon",
+      "description": "Framework-independent SVG icons from a curated Lucide sprite.",
+      "selector": ".nz-icon",
+      "variants": {
+        "small": ".nz-icon-sm",
+        "large": ".nz-icon-lg"
+      },
+      "states": [],
+      "usage": "Reference a symbol with <svg class=\"nz-icon\" aria-hidden=\"true\"><use href=\"/assets/nicolabz/icons.svg#search\"></use></svg>. Give meaningful standalone icons an accessible name."
     }
   ]
 }

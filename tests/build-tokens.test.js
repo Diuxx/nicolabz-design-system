@@ -8,6 +8,7 @@ const { generate } = require("../scripts/build-tokens.js");
 const palette = require("../tokens/palette.json");
 const componentCatalog = require("../tokens/components.json");
 const componentStyles = fs.readFileSync(path.join(__dirname, "..", "src", "styles", "components.css"), "utf8");
+const iconStyles = fs.readFileSync(path.join(__dirname, "..", "src", "styles", "icons.css"), "utf8");
 const baseStyles = fs.readFileSync(path.join(__dirname, "..", "src", "styles", "typography.css"), "utf8");
 const demoMarkup = fs.readFileSync(path.join(__dirname, "..", "demo", "index.html"), "utf8");
 const decorationStyles = fs.readFileSync(path.join(__dirname, "..", "src", "styles", "decorations.css"), "utf8");
@@ -52,9 +53,10 @@ test("rejette les valeurs manquantes, mal formées et les tokens inconnus", () =
 });
 
 test("le catalogue décrit les composants CSS effectivement présentés dans la démo", () => {
-  const selectors = Array.from(componentStyles.matchAll(/([^{}]+)\{/g))
+  const componentStylesheets = `${componentStyles}\n${iconStyles}`;
+  const selectors = Array.from(componentStylesheets.matchAll(/([^{}]+)\{/g))
     .flatMap((match) => match[1].split(",").map((selector) => selector.trim()));
-  const allStyles = `${componentStyles}\n${baseStyles}`;
+  const allStyles = `${componentStylesheets}\n${baseStyles}`;
   const demoClasses = new Set(
     Array.from(demoMarkup.matchAll(/\bclass="([^"]+)"/g))
       .flatMap((match) => match[1].split(/\s+/))

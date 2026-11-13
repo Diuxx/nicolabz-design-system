@@ -1,29 +1,15 @@
 # Nicolabz Design System
 
-Un design system minimaliste, léger et indépendant des frameworks pour créer des interfaces cohérentes entre plusieurs applications.
+A lightweight, framework-independent design system for consistent interfaces
+across applications, with a Minimalist Monochrome / Soft Spectrum visual style.
 
-Il repose sur une identité **Minimalist Monochrome / Soft Spectrum**, avec une palette claire et une déclinaison sombre Graphite Sage.
+## Features
 
-## Fonctionnalités
+- Light and dark themes with shared design tokens.
+- Reusable, accessible CSS components and a curated Lucide SVG icon sprite.
+- Framework-independent HTML and CSS with no runtime dependencies.
 
-- **Thèmes clair et sombre**, avec prise en compte des préférences système.
-- **Composants CSS réutilisables** : boutons, panneaux, formulaires, badges, tags et navigation.
-- **Design tokens** pour harmoniser couleurs, espacements et rayons.
-- **États accessibles** pour les interactions et la validation des formulaires.
-- **Décoration Soft Spectrum** facultative.
-- **Sans dépendance frontend**, utilisable avec HTML, Angular ou d'autres frameworks.
+## Quick Start
 
-## Découvrir
-
-- [Explorer la démonstration](demo/index.html)
-- [Consulter la documentation](docs/USAGE.md)
-
-## Développement
-
-HTML, CSS et JavaScript natifs. Node.js 18+ est requis uniquement pour générer les tokens et lancer les tests.
-
-```sh
-npm run build
-npm run check
-npm test
-```
+Open [the component gallery](demo/index.html) or follow the
+[usage and integration guide](docs/USAGE.md).

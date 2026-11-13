@@ -1,0 +1,44 @@
+{
+  "general": [
+    "house", "search", "menu", "settings",
+    "plus", "square-pen", "trash-2", "check",
+    "x", "circle-alert", "info", "bell",
+    "eye", "eye-off", "download", "upload",
+    "refresh-cw", "chevron-down", "arrow-left",
+    "external-link", "loader-circle", "copy",
+    "sun", "moon"
+  ],
+  "development": [
+    "code-xml", "terminal", "git-branch",
+    "git-merge", "git-pull-request", "bug",
+    "braces", "file-braces", "file-code",
+    "folder-code", "workflow", "webhook",
+    "package", "rocket", "wrench",
+    "flask-conical"
+  ],
+  "business": [
+    "building-2", "briefcase-business",
+    "users-round", "user-cog", "calendar-days",
+    "calendar-check", "clipboard-list",
+    "file-text", "file-spreadsheet", "folder",
+    "chart-no-axes-combined", "chart-pie",
+    "wallet", "receipt", "mail", "handshake"
+  ],
+  "infrastructure": [
+    "server", "server-cog", "database",
+    "hard-drive", "cpu", "memory-stick",
+    "cloud", "cloud-upload", "network",
+    "router", "ethernet-port", "wifi",
+    "shield-check", "lock-keyhole", "key-round",
+    "activity", "container", "boxes", "monitor",
+    "laptop", "globe", "circuit-board",
+    "plug", "shield-alert"
+  ],
+  "existing": [
+    "arrow-down", "arrow-right", "arrow-up", "calendar",
+    "chevron-left", "chevron-right", "chevron-up",
+    "circle-check", "circle-help", "circle-x",
+    "clipboard", "clock", "code", "file", "filter",
+    "heart", "link", "lock", "pencil", "shield", "user"
+  ]
+}

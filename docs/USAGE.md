@@ -1,126 +1,106 @@
-# Utilisation et intégration
+# Usage and Integration
 
-Nicolabz Design System fournit des tokens CSS, des composants HTML/CSS, une décoration facultative et un gestionnaire de thèmes. Il fonctionne sans framework et sans dépendance frontend.
+Nicolabz Design System provides shared CSS tokens and components, light and dark
+themes, and a framework-independent Lucide SVG sprite. It has no runtime
+JavaScript dependency. The package is private and is not published to the public
+npm registry.
 
-## 1. Installation
+## Installation
 
-Le package du dépôt est nommé `@nicolabz/design-system`. Il n'est pas publié sur le registre npm public (`private: true`). Pour un projet utilisant npm, installer le dépôt depuis GitHub :
+Install a tagged release or commit from GitHub and keep the lockfile in the
+consuming application:
 
 ```sh
-npm install "github:Diuxx/nicolabz-design-system#develop"
+npm install "github:Diuxx/nicolabz-design-system#REF"
 ```
 
-La branche `develop` est pratique pour tester. Pour une application stable, remplacer `develop` par un **tag Git ou un SHA de commit** existant afin de figer la version. Conserver le `package-lock.json` dans le projet consommateur.
+Replace `REF` with a verified tag or commit SHA. The package exports
+`theme.css`, `components.css`, `typography.css`, `decorations.css`, `icons.css`,
+`icons.svg`, and `theme.js`.
 
-Les exports publics du package sont : `theme.css`, `components.css`, `typography.css`, `decorations.css` et `theme.js`.
+## CSS and Theme
 
-### Projet avec bundler (Angular, Vite, React, Vue…)
-
-Charger les feuilles globales par le mécanisme habituel du framework ou du bundler :
+Import the required styles through the application's bundler:
 
 ```js
 import "@nicolabz/design-system/theme.css";
 import "@nicolabz/design-system/components.css";
-import "@nicolabz/design-system/decorations.css"; // Facultatif
-import "@nicolabz/design-system/typography.css";  // Facultatif
+import "@nicolabz/design-system/icons.css";
 ```
 
-Dans Angular, ces feuilles peuvent également être déclarées dans les styles globaux de la configuration de build. Ne pas les importer dans chaque composant.
+`typography.css` and `decorations.css` are optional. In Angular, add global
+styles through the build configuration rather than importing them per
+component. `theme.js` accesses `window` and `document`; run it only in the
+browser. For static HTML, load it synchronously in `<head>` if the theme should
+be applied before first paint.
 
-`theme.js` utilise `window` et `document` : ne l'exécuter **que dans le navigateur**. Pour appliquer le thème avant le premier affichage, le servir en ressource statique et le charger de manière synchrone dans le `<head>` ; un import JavaScript différé peut provoquer un bref changement de thème.
+## Using Icons
 
-### Page HTML statique
-
-Copier les fichiers nécessaires depuis une version identifiée du dépôt dans un dossier local (exemple : `assets/nicolabz/`), puis les inclure :
+Serve `src/icons/icons.svg` as a static asset in the consuming application.
+Copy it into the application's public assets directory (for example
+`assets/nicolabz/icons.svg`) and reference its URL from any framework or plain
+HTML:
 
 ```html
-<head>
-  <script src="assets/nicolabz/theme.js"></script>
-  <link rel="stylesheet" href="assets/nicolabz/styles/theme.css">
-  <link rel="stylesheet" href="assets/nicolabz/styles/components.css">
-  <link rel="stylesheet" href="assets/nicolabz/styles/decorations.css">
-  <link rel="stylesheet" href="assets/nicolabz/styles/typography.css">
-</head>
-<body class="nz-base">
-  <button class="nz-button nz-button-primary">Continuer</button>
-</body>
+<svg class="nz-icon" aria-hidden="true">
+  <use href="/assets/nicolabz/icons.svg#search"></use>
+</svg>
 ```
 
-Adapter les chemins à l'emplacement réel des ressources. Aucun outil Node.js n'est nécessaire pour consulter cette page.
+The curated sprite contains 40 icons: `activity`, `arrow-down`, `arrow-left`,
+`arrow-right`, `arrow-up`, `bell`, `calendar`, `check`, `chevron-down`,
+`chevron-left`, `chevron-right`, `chevron-up`, `circle-alert`, `circle-check`,
+`circle-help`, `circle-x`, `clipboard`, `clock`, `code`, `copy`, `download`,
+`external-link`, `eye`, `file`, `filter`, `heart`, `house`, `info`, `link`,
+`lock`, `mail`, `menu`, `moon`, `pencil`, `plus`, `search`, `settings`,
+`shield`, `sun`, and `user`.
 
-## 2. Composants et conventions
-
-Les composants réutilisables sont répertoriés dans [`tokens/components.json`](../tokens/components.json) et illustrés dans la [galerie](../demo/index.html). Les principales classes publiques sont :
-
-- `.nz-button`, `.nz-button-primary`, `.nz-button-secondary`
-- `.nz-panel`, `.nz-panel-muted`
-- `.nz-badge`, `.nz-badge-success`, `.nz-tag`
-- `.nz-form-panel`, `.nz-nav-list`
-- `.nz-spectrum` (décoration facultative)
-
-**Toujours utiliser le préfixe `nz-` pour les nouvelles intégrations.** Les anciennes classes sans préfixe sont uniquement des alias de compatibilité. Les styles spécifiques à une application restent dans cette application.
-
-Pour les boutons, utiliser les attributs natifs `disabled` et, pour un état de chargement, `aria-busy="true"` avec un libellé visible. Pour les formulaires, utiliser `readonly`, `disabled` et `aria-invalid="true"` en associant un message d'erreur avec `aria-describedby`.
-
-## 3. Tokens et styles de base
-
-Les variables CSS sont générées depuis [`tokens/palette.json`](../tokens/palette.json) :
-
-- Couleurs : `--color-*`
-- Espacements : `--space-*`
-- Rayons : `--radius-*`
-
-`theme.css` fournit les tokens et les couleurs des deux thèmes ; `components.css` fournit les composants. `typography.css` est facultatif : ses styles de base sont activés uniquement sous `.nz-base` (généralement sur `<body>`).
-
-`decorations.css` fournit la forme Soft Spectrum. Son conteneur doit être positionné dans l'application, derrière le contenu et sans intercepter les interactions :
+Icons inherit `currentColor`. `.nz-icon` defaults to 20px; `.nz-icon-sm` and
+`.nz-icon-lg` use 16px and 24px. Decorative icons should use
+`aria-hidden="true"`. Give a meaningful standalone icon an accessible name:
 
 ```html
-<div class="nz-spectrum" aria-hidden="true">
-  <div class="nz-spectrum__shape"></div>
-</div>
+<svg class="nz-icon" role="img" aria-labelledby="search-icon-title">
+  <title id="search-icon-title">Search</title>
+  <use href="/assets/nicolabz/icons.svg#search"></use>
+</svg>
 ```
 
-Placer cette décoration dans un parent avec `position: relative` et `isolation: isolate`, puis contrôler l'empilement du contenu avec `z-index`.
+No icon runtime or framework wrapper is required. Native `<svg>` and `<use>`
+work in HTML, Angular, React, Vue, Eleventy, and other environments that serve
+the sprite and allow same-origin SVG references.
 
-## 4. Thèmes
+## Components and Accessibility
 
-Le script `theme.js` applique `data-theme="light"` ou `data-theme="dark"` sur l'élément `<html>`. En l'absence de choix enregistré, il suit la préférence système. Le choix explicite est conservé dans `localStorage` sous la clé `nicolabz-theme` lorsque le stockage est accessible.
+Use the `nz-` prefix for new integrations. The component catalog is
+[`tokens/components.json`](../tokens/components.json), and examples are shown
+in the [component gallery](../demo/index.html). Associate form labels with
+their controls, use native `disabled` and `readonly` attributes, and connect
+validation messages using `aria-invalid` and `aria-describedby`.
 
-API navigateur :
+## Development
 
-```js
-window.nicolabzTheme.getTheme();
-window.nicolabzTheme.setTheme("dark");
-window.nicolabzTheme.toggle();
-```
-
-Le script émet l'événement `nicolabz-theme-change` avec `event.detail.theme`. Fournir un contrôle de changement de thème accessible dans chaque application et éviter tout gestionnaire concurrent.
-
-## 5. Développement et mises à jour
-
-Node.js 18+ suffit : aucune installation de dépendance externe n'est requise pour contribuer au dépôt.
+Node.js 18+ is required. `lucide-static` is a development dependency used only
+to generate the curated sprite and is not required by consuming applications.
 
 ```sh
-npm run build   # Valide les tokens et régénère src/styles/theme.css
-npm run check   # Vérifie la synchronisation sans écrire de fichier
-npm test        # Exécute les tests
+npm install
+npm run build          # Generate theme tokens and the Lucide sprite
+npm run build:icons    # Regenerate the sprite and copy its license
+npm run check          # Check generated assets without writing files
+npm test               # Run the test suite
 ```
 
-Ne jamais modifier directement `src/styles/theme.css`, car il est généré. Pour ajouter ou modifier un composant, synchroniser le CSS, le catalogue et la démonstration.
+To add an icon, update the explicit allowed-name list in
+[`scripts/build-icons.js`](../scripts/build-icons.js), then run
+`npm run build:icons`. The generated `src/icons/icons.svg` and
+`src/icons/LICENSE` must not be edited manually. Lucide attribution and license
+terms are retained in the generated sprite and [`src/icons/LICENSE`](../src/icons/LICENSE).
 
-Pour mettre à jour une application consommatrice, installer une nouvelle référence Git vérifiée puis contrôler le build et le rendu :
+## Limitations
 
-```sh
-npm install "github:Diuxx/nicolabz-design-system#REF_STABLE"
-```
-
-Remplacer `REF_STABLE` par un tag ou un SHA existant. Si les fichiers sont copiés dans une page HTML statique, remplacer ensemble les ressources issues de la même version.
-
-## 6. Limites actuelles
-
-- Aucune publication sur le registre npm public ni bibliothèque propre à un framework.
-- Le catalogue contient un ensemble de composants de base, pas tous les composants d'une application complexe.
-- La galerie montre des interactions locales, sans backend.
-- Les tests automatisés ne remplacent pas des tests d'accessibilité et de compatibilité en navigateur.
-
-Pour contribuer à l'architecture et aux conventions, consulter les règles internes du dépôt ; pour la direction artistique, consulter [les principes visuels](DESIGN.md).
+Native select option menus and external SVG `<use>` references have browser and
+deployment-specific behavior. Serve the sprite from the application's origin
+and test in the target browsers. The gallery demonstrates local interactions
+only; the design system does not provide application backends or
+framework-specific components.
