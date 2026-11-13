@@ -77,11 +77,14 @@ test("the icon generator rejects duplicate, invalid, and missing icon names", (t
 
 test("icon CSS, package exports, license, and gallery references stay in sync", () => {
   const references = Array.from(demoHtml.matchAll(/href="\.\.\/src\/icons\/icons\.svg#([^"]+)"/g), (match) => match[1]);
+  const iconExample = demoHtml.match(/<template data-example="icons">([\s\S]*?)<\/template>/);
+  assert.ok(iconExample);
+  const galleryReferences = Array.from(iconExample[1].matchAll(/href="\.\.\/src\/icons\/icons\.svg#([^"]+)"/g), (match) => match[1]);
   const spriteIds = new Set(Array.from(sprite.matchAll(/<symbol\b[^>]*\bid="([^"]+)"/g), (match) => match[1]));
   const license = fs.readFileSync(path.join(root, "src/icons/LICENSE"), "utf8");
   const upstreamLicense = fs.readFileSync(path.join(path.dirname(lucidePackagePath), "LICENSE"), "utf8");
 
-  assert.deepEqual([...new Set(references.filter((name) => iconNames.includes(name)))], iconNames);
+  assert.deepEqual([...new Set(galleryReferences)], iconNames);
   assert.ok(references.every((name) => spriteIds.has(name)));
   assert.match(iconCss, /\.nz-icon\s*\{[^}]*width:\s*20px;[^}]*height:\s*20px;[^}]*color:\s*inherit;[^}]*stroke:\s*currentColor/);
   assert.match(iconCss, /\.nz-icon-sm\s*\{[^}]*width:\s*16px;[^}]*height:\s*16px/);
@@ -92,4 +95,15 @@ test("icon CSS, package exports, license, and gallery references stay in sync", 
   assert.equal(license, upstreamLicense);
   assert.ok(catalog.components.some((component) => component.selector === ".nz-icon"));
   assert.match(demoHtml, /<svg class="nz-icon" aria-hidden="true"><use href="\.\.\/src\/icons\/icons\.svg#search"><\/use><\/svg>Rechercher/);
+});
+
+test("the icon gallery and its navigation link appear last", () => {
+  const main = demoHtml.match(/<main\b[^>]*>([\s\S]*?)<\/main>/);
+  const navigation = demoHtml.match(/<nav aria-label="Sections de la bibliothèque">([\s\S]*?)<\/nav>/);
+  assert.ok(main);
+  assert.ok(navigation);
+  const sections = Array.from(main[1].matchAll(/<section id="([^"]+)"/g), (match) => match[1]);
+  const links = Array.from(navigation[1].matchAll(/<a href="#([^"]+)"/g), (match) => match[1]);
+  assert.equal(sections.at(-1), "icons");
+  assert.deepEqual(links, sections);
 });
