@@ -47,6 +47,12 @@ test("les contrôles partagent des dimensions compactes et des cibles tactiles",
   assert.match(componentsCss, /\.nz-loading\s*\{[^}]*align-items:\s*center/);
 });
 
+test("les switches sont centrés en ligne et conservent leur taille", () => {
+  assert.match(componentsCss, /\.nz-switch,\s*\.nz-choice\s*\{[^}]*align-items:\s*center;/);
+  assert.match(componentsCss, /\.nz-switch\s*\{\s*vertical-align:\s*middle;/);
+  assert.match(componentsCss, /\.nz-switch input,\s*\.nz-form-panel \.nz-switch input\s*\{[^}]*flex:\s*none;/);
+});
+
 test("le select natif a un chevron thématique et des états visuels dédiés", () => {
   assert.match(componentsCss, /\.nz-form-panel select,\s*\.form-panel select\s*\{[^}]*appearance:\s*none;/);
   assert.match(componentsCss, /padding-right:\s*calc\(var\(--space-8\)\s*\+\s*var\(--space-2\)\)/);

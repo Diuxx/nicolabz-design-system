@@ -452,6 +452,10 @@
   cursor: pointer;
 }
 
+.nz-switch {
+  vertical-align: middle;
+}
+
 .nz-choice input,
 .nz-form-panel .nz-choice input {
   flex: none;
@@ -467,6 +471,7 @@
 .nz-form-panel .nz-switch input {
   appearance: none;
   box-sizing: border-box;
+  flex: none;
   width: 36px;
   height: 20px;
   min-height: 20px;
