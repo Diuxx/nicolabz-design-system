@@ -6,7 +6,9 @@
     <meta name="color-scheme" content="light dark" />
     <meta name="theme-color" content="" />
     <title>Composants — Nicolabz Design System</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
     <script src="../src/theme.js"></script>
+    <script src="../src/components.js" defer></script>
     <link rel="stylesheet" href="../src/styles/theme.css" />
     <link rel="stylesheet" href="../src/styles/typography.css" />
     <link rel="stylesheet" href="../src/styles/components.css" />
@@ -41,6 +43,7 @@
             <li><a href="#containers">Conteneurs</a></li>
             <li><a href="#indicators">Indicateurs</a></li>
             <li><a href="#navigation">Navigation</a></li>
+            <li><a href="#extended-components">Composants complémentaires</a></li>
           </ul>
         </nav>
         <p class="sidebar-note">HTML · CSS natif<br />Clair et sombre</p>
@@ -246,24 +249,26 @@
               </details>
               <template data-example="forms">
                 <form id="demo-form" class="nz-form-panel">
-                  <label for="example-name">Nom</label>
+                  <label class="nz-field-label" for="example-name">Nom</label>
                   <input id="example-name" name="name" type="text" placeholder="Ton nom" required maxlength="80" />
-                  <label for="example-role">Rôle</label>
+                  <label class="nz-field-label" for="example-role">Rôle</label>
                   <select id="example-role" name="role">
                     <option>Designer</option>
                     <option>Développeur</option>
                   </select>
-                  <label for="example-message">Message</label>
+                  <label class="nz-field-label" for="example-message">Message</label>
                   <textarea id="example-message" name="message" placeholder="Quelques mots..."></textarea>
-                  <label for="example-readonly">Lecture seule</label>
+                  <label class="nz-field-label" for="example-readonly">Lecture seule</label>
                   <input id="example-readonly" type="text" value="Valeur non modifiable" readonly />
-                  <label for="example-disabled">Champ désactivé</label>
+                  <label class="nz-field-label" for="example-disabled">Champ désactivé</label>
                   <input id="example-disabled" type="text" value="Indisponible" disabled />
-                  <label for="example-invalid">Champ en erreur</label>
+                  <label class="nz-field-label" for="example-invalid">Champ en erreur</label>
                   <input id="example-invalid" type="text" value="Valeur incorrecte" aria-invalid="true" aria-describedby="example-invalid-error" />
                   <p id="example-invalid-error" class="nz-field-error">Corrige cette valeur avant de poursuivre.</p>
-                  <label for="example-updates"><input id="example-updates" name="updates" type="checkbox" /> Recevoir les nouvelles</label>
-                  <button class="nz-button nz-button-primary" type="submit">Créer un brouillon</button>
+                  <div class="nz-control-row">
+                    <label class="nz-choice" for="example-updates"><input id="example-updates" name="updates" type="checkbox" /> Recevoir les nouvelles</label>
+                    <button class="nz-button nz-button-primary" type="submit">Créer un brouillon</button>
+                  </div>
                   <p id="form-feedback" class="form-feedback" role="status" aria-live="polite">Démo locale, aucune donnée envoyée.</p>
                 </form>
               </template>
@@ -345,6 +350,135 @@
                     <li><a href="#indicators">Notifications</a></li>
                   </ul>
                 </nav>
+              </template>
+            </article>
+          </section>
+
+          <section id="extended-components" class="category-section" aria-labelledby="extended-title">
+            <header class="category-heading">
+              <div><p class="eyebrow">07 / INTERACTIONS</p><h2 id="extended-title">Composants complémentaires</h2></div>
+              <p>Contrôles natifs et interactions accessibles pour les interfaces courantes.</p>
+            </header>
+            <article class="story-card nz-panel" data-story="essential" aria-labelledby="essential-title">
+              <div class="story-heading"><div><h3 id="essential-title">Composants essentiels</h3><p>Alertes, dialogue, notifications et contrôles.</p></div></div>
+              <div class="story-preview story-preview-form" data-preview="essential" aria-label="Composants essentiels"></div>
+              <details class="code-details">
+                <summary>Exemple HTML</summary>
+                <div class="code-toolbar"><button class="nz-button nz-button-secondary copy-button" type="button" data-copy>Copier le code</button><span data-copy-status aria-live="polite"></span></div>
+                <pre><code data-code></code></pre>
+              </details>
+              <template data-example="essential">
+                <div class="nz-alert nz-alert-info"><strong>Information :</strong> une mise à jour est disponible.</div>
+                <div class="nz-alert nz-alert-success"><strong>Succès :</strong> les changements sont enregistrés.</div>
+                <div class="nz-alert nz-alert-warning"><strong>Attention :</strong> vérifie les informations.</div>
+                <div class="nz-alert nz-alert-error"><strong>Erreur :</strong> la sauvegarde a échoué.</div>
+                <div class="nz-control-row">
+                  <button class="nz-button nz-button-secondary" type="button" data-open-dialog>Ouvrir le dialogue</button>
+                  <button class="nz-button nz-button-secondary" type="button" data-open-form-dialog>Ouvrir le formulaire</button>
+                </div>
+                <dialog class="nz-dialog" aria-labelledby="demo-dialog-title" id="demo-dialog">
+                  <h3 id="demo-dialog-title">Confirmer</h3>
+                  <p>Continuer avec cette action ?</p>
+                  <form method="dialog" class="nz-dialog-actions">
+                    <button class="nz-button nz-button-secondary" value="cancel">Annuler</button>
+                    <button class="nz-button nz-button-primary" value="confirm">Confirmer</button>
+                  </form>
+                </dialog>
+                <dialog class="nz-dialog" aria-labelledby="demo-form-dialog-title" id="demo-form-dialog">
+                  <h3 id="demo-form-dialog-title">Nouveau projet</h3>
+                  <form method="dialog" class="nz-form-panel">
+                    <label class="nz-field-label" for="dialog-project-name">Nom du projet</label>
+                    <input id="dialog-project-name" name="project" required />
+                    <div class="nz-dialog-actions">
+                      <button class="nz-button nz-button-secondary" value="cancel" formnovalidate>Annuler</button>
+                      <button class="nz-button nz-button-primary" value="confirm">Valider</button>
+                    </div>
+                  </form>
+                </dialog>
+                <p data-dialog-feedback role="status"></p>
+                <div>
+                  <div class="nz-form-panel toast-controls">
+                    <label class="nz-field-label" for="toast-position">Position des notifications</label>
+                    <div class="nz-control-row">
+                      <select id="toast-position"><option value="top">En haut</option><option value="bottom">En bas</option></select>
+                      <button class="nz-button nz-button-secondary" type="button" data-toast-variant="info">Information</button>
+                      <button class="nz-button nz-button-secondary" type="button" data-toast-variant="success">Succès</button>
+                      <button class="nz-button nz-button-secondary" type="button" data-toast-variant="warning">Attention</button>
+                      <button class="nz-button nz-button-secondary" type="button" data-toast-variant="error">Erreur</button>
+                      <button class="nz-button nz-button-secondary" type="button" data-show-timed-toast>Notification temporaire</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="nz-toast-region" data-toast-region role="status" aria-live="polite" tabindex="-1">
+                  <template><div class="nz-toast"><span>Notification persistante.</span><button class="nz-button nz-button-secondary" type="button">Fermer</button></div></template>
+                </div>
+                <div class="nz-control-row">
+                  <label class="nz-switch"><input type="checkbox" role="switch" /> Notifications</label>
+                  <label class="nz-switch"><input type="checkbox" role="switch" checked disabled /> Activé, indisponible</label>
+                </div>
+                <fieldset>
+                  <legend>Format</legend>
+                  <div class="nz-control-row">
+                    <label class="nz-choice"><input class="nz-radio" type="radio" name="demo-format" value="short" checked /> Court</label>
+                    <label class="nz-choice"><input class="nz-radio" type="radio" name="demo-format" value="long" /> Long</label>
+                    <label class="nz-choice"><input class="nz-radio" type="radio" name="demo-format" disabled /> Indisponible</label>
+                  </div>
+                </fieldset>
+                <div class="nz-control-row">
+                  <span class="nz-loading" role="status"><span class="nz-spinner nz-spinner-sm" aria-hidden="true"></span> Chargement</span>
+                  <span class="nz-spinner" aria-hidden="true"></span>
+                  <span class="nz-spinner nz-spinner-lg" aria-hidden="true"></span>
+                </div>
+                <div role="status" aria-label="Chargement du contenu"><span class="nz-skeleton" aria-hidden="true"></span></div>
+                <div class="nz-control-row">
+                  <button class="nz-button nz-button-secondary nz-icon-button" type="button" aria-label="Rechercher">
+                    <svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#search"></use></svg>
+                  </button>
+                  <button class="nz-button nz-button-secondary nz-icon-button" type="button" aria-label="Rechercher" disabled>
+                    <svg class="nz-icon" aria-hidden="true"><use href="../src/icons/icons.svg#search"></use></svg>
+                  </button>
+                </div>
+              </template>
+            </article>
+            <article class="story-card nz-panel" data-story="advanced" aria-labelledby="advanced-title">
+              <div class="story-heading"><div><h3 id="advanced-title">Navigation et contenu</h3><p>Onglets, accordéon, tableau et actions contextuelles.</p></div></div>
+              <div class="story-preview story-preview-form" data-preview="advanced" aria-label="Composants avancés"></div>
+              <details class="code-details">
+                <summary>Exemple HTML</summary>
+                <div class="code-toolbar"><button class="nz-button nz-button-secondary copy-button" type="button" data-copy>Copier le code</button><span data-copy-status aria-live="polite"></span></div>
+                <pre><code data-code></code></pre>
+              </details>
+              <template data-example="advanced">
+                <div class="nz-tabs" data-tabs>
+                  <div class="nz-tab-list" aria-label="Détails">
+                    <button class="nz-tab" id="tab-overview" type="button" aria-controls="panel-overview" aria-selected="true">Aperçu</button>
+                    <button class="nz-tab" id="tab-details" type="button" aria-controls="panel-details">Détails</button>
+                    <button class="nz-tab" id="tab-disabled" type="button" aria-controls="panel-disabled" disabled>Indisponible</button>
+                  </div>
+                  <div class="nz-tab-panel" id="panel-overview" tabindex="0">Contenu de l'aperçu.</div>
+                  <div class="nz-tab-panel" id="panel-details" tabindex="0">Contenu des détails.</div>
+                  <div class="nz-tab-panel" id="panel-disabled" tabindex="0">Contenu indisponible.</div>
+                </div>
+                <details class="nz-accordion"><summary>Plus d'informations</summary><div>Le contenu est ouvert avec un contrôle natif.</div></details>
+                <div class="nz-table-container" role="region" aria-label="Projets récents" tabindex="0">
+                  <table class="nz-table">
+                    <caption>Projets récents</caption>
+                    <thead><tr><th scope="col">Projet</th><th scope="col">Statut</th></tr></thead>
+                    <tbody><tr data-page="1"><td>Design system</td><td>Actif</td></tr><tr data-page="2" hidden><td>Documentation</td><td>En cours</td></tr></tbody>
+                  </table>
+                </div>
+                <nav class="nz-pagination" aria-label="Pagination">
+                  <a class="nz-button nz-button-secondary" href="#advanced-title" data-page-link="1" aria-current="page" aria-label="Page 1">1</a>
+                  <a class="nz-button nz-button-secondary" href="#advanced-title" data-page-link="2" aria-label="Page 2">2</a>
+                </nav>
+                <details class="nz-dropdown" data-dropdown>
+                  <summary class="nz-button nz-button-secondary">Actions</summary>
+                  <div class="nz-dropdown-panel"><a href="#overview">Vue d'ensemble</a><a href="#forms">Formulaire</a></div>
+                </details>
+                <span class="nz-tooltip" data-tooltip>
+                  <button class="nz-button nz-button-secondary" type="button" aria-describedby="demo-tooltip">Aide</button>
+                  <span class="nz-tooltip-text" id="demo-tooltip" role="tooltip">Informations complémentaires.</span>
+                </span>
               </template>
             </article>
           </section>

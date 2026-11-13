@@ -6,7 +6,8 @@ across applications, with a Minimalist Monochrome / Soft Spectrum visual style.
 ## Features
 
 - Light and dark themes with shared design tokens.
-- Reusable, accessible CSS components and a curated Lucide SVG icon sprite.
+- Reusable, accessible CSS components with compact controls and touch-friendly
+  targets, plus a curated Lucide SVG icon sprite.
 - Framework-independent HTML and CSS with no runtime dependencies.
 
 ## Quick Start

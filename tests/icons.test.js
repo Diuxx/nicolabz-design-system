@@ -12,7 +12,16 @@ const root = path.resolve(__dirname, "..");
 const sprite = fs.readFileSync(path.join(root, "src/icons/icons.svg"), "utf8");
 const iconCss = fs.readFileSync(path.join(root, "src/styles/icons.css"), "utf8");
 const demoHtml = fs.readFileSync(path.join(root, "demo/index.html"), "utf8");
+const favicon = fs.readFileSync(path.join(root, "demo/favicon.svg"), "utf8");
 const catalog = require("../tokens/components.json");
+
+test("the gallery links to its adaptive SVG favicon", () => {
+  assert.match(demoHtml, /<link rel="icon" href="favicon\.svg" type="image\/svg\+xml"\s*\/>/);
+  assert.match(favicon, /<svg\b[^>]*xmlns="http:\/\/www\.w3\.org\/2000\/svg"[^>]*viewBox="0 0 32 32"/);
+  assert.match(favicon, /color-scheme:\s*light dark/);
+  assert.match(favicon, /fill="CanvasText"/);
+  assert.match(favicon, /stroke="Canvas"/);
+});
 
 test("the curated icon sprite is deterministic and contains unique Lucide symbols", () => {
   const symbols = Array.from(sprite.matchAll(/<symbol\b([^>]*)>([\s\S]*?)<\/symbol>/g));

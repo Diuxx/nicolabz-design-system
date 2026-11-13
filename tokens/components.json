@@ -62,8 +62,8 @@
         "readonly",
         "invalid"
       ],
-      "variants": {},
-      "usage": "Use .nz-form-panel; associate labels using for/id. For errors set aria-invalid=\"true\" and aria-describedby to a .nz-field-error element."
+      "variants": { "compact": ".nz-form-panel-compact" },
+      "usage": "Use .nz-form-panel; associate labels using for/id. Add .nz-field-label for grouped labels, and .nz-form-panel-compact for short fields. For errors set aria-invalid=\"true\" and aria-describedby to a .nz-field-error element."
     },
     {
       "name": "Navigation List",
@@ -90,6 +90,134 @@
       },
       "states": [],
       "usage": "Reference a symbol with <svg class=\"nz-icon\" aria-hidden=\"true\"><use href=\"/assets/nicolabz/icons.svg#search\"></use></svg>. Give meaningful standalone icons an accessible name."
+    },
+    {
+      "name": "Alert",
+      "description": "Inline contextual messages with explicit status text.",
+      "selector": ".nz-alert",
+      "variants": { "info": ".nz-alert-info", "success": ".nz-alert-success", "warning": ".nz-alert-warning", "error": ".nz-alert-error" },
+      "states": []
+    },
+    {
+      "name": "Dialog",
+      "description": "Native modal dialog.",
+      "selector": ".nz-dialog",
+      "variants": {},
+      "states": [],
+      "usage": "Use a .nz-dialog-actions container for right-aligned, wrapping actions, including inside .nz-form-panel."
+    },
+    {
+      "name": "Toast",
+      "description": "Stacked, dismissible viewport notification in a live region.",
+      "selector": ".nz-toast",
+      "variants": {},
+      "states": [],
+      "usage": "Place a focusable live region directly under body. Call showToast(region, message, { variant, duration, dismissLabel }); variant is info, success, warning or error. Add .nz-toast-region-bottom for bottom placement."
+    },
+    {
+      "name": "Switch",
+      "description": "Native checkbox presented as a switch.",
+      "selector": ".nz-switch",
+      "variants": {},
+      "states": []
+    },
+    {
+      "name": "Field Label",
+      "description": "Block label with spacing for a form field.",
+      "selector": ".nz-field-label",
+      "variants": {},
+      "states": []
+    },
+    {
+      "name": "Choice",
+      "description": "Aligned label and native checkbox or radio control.",
+      "selector": ".nz-choice",
+      "variants": {},
+      "states": []
+    },
+    {
+      "name": "Control Row",
+      "description": "Wrapping row for related controls.",
+      "selector": ".nz-control-row",
+      "variants": {},
+      "states": []
+    },
+    {
+      "name": "Loading Label",
+      "description": "Aligned loading indicator and text.",
+      "selector": ".nz-loading",
+      "variants": {},
+      "states": []
+    },
+    {
+      "name": "Radio",
+      "description": "Native radio input.",
+      "selector": ".nz-radio",
+      "variants": {},
+      "states": []
+    },
+    {
+      "name": "Spinner",
+      "description": "Indeterminate loading indicator.",
+      "selector": ".nz-spinner",
+      "variants": { "small": ".nz-spinner-sm", "large": ".nz-spinner-lg" },
+      "states": []
+    },
+    {
+      "name": "Skeleton",
+      "description": "Placeholder for content being loaded.",
+      "selector": ".nz-skeleton",
+      "variants": {},
+      "states": []
+    },
+    {
+      "name": "Icon Button",
+      "description": "Compact labeled action using an icon.",
+      "selector": ".nz-icon-button",
+      "variants": {},
+      "states": []
+    },
+    {
+      "name": "Tabs",
+      "description": "Keyboard-accessible tabbed content.",
+      "selector": ".nz-tabs",
+      "variants": {},
+      "states": []
+    },
+    {
+      "name": "Accordion",
+      "description": "Expandable content based on native details.",
+      "selector": ".nz-accordion",
+      "variants": {},
+      "states": []
+    },
+    {
+      "name": "Table",
+      "description": "Structured data with horizontal overflow on small screens.",
+      "selector": ".nz-table",
+      "variants": {},
+      "states": []
+    },
+    {
+      "name": "Pagination",
+      "description": "Navigation links for pages of results.",
+      "selector": ".nz-pagination",
+      "variants": {},
+      "states": []
+    },
+    {
+      "name": "Dropdown",
+      "description": "Native disclosure for contextual links and actions.",
+      "selector": ".nz-dropdown",
+      "variants": {},
+      "states": []
+    },
+    {
+      "name": "Tooltip",
+      "description": "Contextual non-interactive description.",
+      "selector": ".nz-tooltip",
+      "variants": {},
+      "states": []
     }
   ]
 }

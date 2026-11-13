@@ -7,7 +7,8 @@
   ],
   "sideEffects": [
     "**/*.css",
-    "./src/theme.js"
+    "./src/theme.js",
+    "./src/components.js"
   ],
   "exports": {
     "./theme.css": "./src/styles/theme.css",
@@ -16,6 +17,7 @@
     "./decorations.css": "./src/styles/decorations.css",
     "./icons.css": "./src/styles/icons.css",
     "./icons.svg": "./src/icons/icons.svg",
+    "./components.js": "./src/components.js",
     "./theme.js": "./src/theme.js"
   },
   "scripts": {

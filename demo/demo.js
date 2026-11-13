@@ -65,6 +65,52 @@
   }
 
   initializeExamples();
+  const toastRegion = document.querySelector("[data-toast-region]");
+  document.body.append(toastRegion);
+  for (const tabs of document.querySelectorAll("[data-tabs]")) window.nicolabzComponents.initializeTabs(tabs);
+  for (const tooltip of document.querySelectorAll("[data-tooltip]")) window.nicolabzComponents.initializeTooltip(tooltip);
+  for (const dropdown of document.querySelectorAll("[data-dropdown]")) window.nicolabzComponents.initializeDropdown(dropdown);
+  const dialog = document.querySelector("#demo-dialog");
+  document.querySelector("[data-open-dialog]").addEventListener("click", () => dialog.showModal());
+  const formDialog = document.querySelector("#demo-form-dialog");
+  document.querySelector("[data-open-form-dialog]").addEventListener("click", () => formDialog.showModal());
+  formDialog.addEventListener("close", () => {
+    if (formDialog.returnValue === "confirm") {
+      document.querySelector("[data-dialog-feedback]").textContent = `Projet : ${document.querySelector("#dialog-project-name").value}`;
+    }
+    formDialog.returnValue = "";
+  });
+  const messages = {
+    info: "Information : une mise à jour est disponible.",
+    success: "Succès : les changements sont enregistrés.",
+    warning: "Attention : vérifie les informations.",
+    error: "Erreur : la sauvegarde a échoué."
+  };
+  document.querySelector("#toast-position").addEventListener("change", (event) => {
+    toastRegion.classList.toggle("nz-toast-region-bottom", event.target.value === "bottom");
+  });
+  for (const button of document.querySelectorAll("[data-toast-variant]")) {
+    button.addEventListener("click", () => {
+      const variant = button.dataset.toastVariant;
+      window.nicolabzComponents.showToast(toastRegion, messages[variant], { variant, dismissLabel: "Fermer" });
+    });
+  }
+  document.querySelector("[data-show-timed-toast]").addEventListener("click", () => {
+    window.nicolabzComponents.showToast(toastRegion, "Information : notification temporaire.", {
+      duration: 5000,
+      dismissLabel: "Fermer"
+    });
+  });
+  for (const link of document.querySelectorAll("[data-page-link]")) {
+    link.addEventListener("click", (event) => {
+      event.preventDefault();
+      for (const item of document.querySelectorAll("[data-page-link]")) {
+        if (item === link) item.setAttribute("aria-current", "page");
+        else item.removeAttribute("aria-current");
+      }
+      for (const row of document.querySelectorAll("tr[data-page]")) row.hidden = row.dataset.page !== link.dataset.pageLink;
+    });
+  }
   updateThemeControls();
   window.addEventListener("nicolabz-theme-change", updateThemeControls);
   toggleButton.addEventListener("click", () => window.nicolabzTheme.toggle());

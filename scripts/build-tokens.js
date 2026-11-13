@@ -12,6 +12,7 @@ const artNames = ["lavender", "blue", "peach", "mint"];
 const artDimension = /^(?:0|[1-9]\d*)(?:\.\d+)?px$/;
 const radiusNames = ["sm", "md", "lg"];
 const spacingNames = ["1", "2", "3", "4", "6", "8", "12", "16"];
+const controlNames = ["height", "touchHeight"];
 
 function requireKeys(value, keys, location) {
   if (!value || typeof value !== "object" || Array.isArray(value)) {
@@ -68,6 +69,11 @@ function generate(palette) {
   const dimension = /^(?:0|[1-9]\d*)(?:\.\d+)?px$/;
   validateValues(palette.radii, radiusNames, "radii", dimension);
   validateValues(palette.spacing, spacingNames, "spacing", dimension);
+  validateValues(palette.controls, controlNames, "controls", dimension);
+  if (parseFloat(palette.controls.height) < 24 || parseFloat(palette.controls.touchHeight) < 44 ||
+      parseFloat(palette.controls.touchHeight) < parseFloat(palette.controls.height)) {
+    throw new Error("Les dimensions des contrôles sont insuffisantes.");
+  }
 
   const lines = ["/* Généré par scripts/build-tokens.js : ne pas modifier manuellement. */"];
   for (const theme of ["light", "dark"]) {
@@ -81,6 +87,7 @@ function generate(palette) {
     if (theme === "light") {
       for (const name of radiusNames) lines.push(`  --radius-${name}: ${palette.radii[name]};`);
       for (const name of spacingNames) lines.push(`  --space-${name}: ${palette.spacing[name]};`);
+      for (const name of controlNames) lines.push(`  --control-${kebab(name)}: ${palette.controls[name]};`);
     }
     lines.push("}");
   }

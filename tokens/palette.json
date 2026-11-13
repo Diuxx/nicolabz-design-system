@@ -59,6 +59,10 @@
     "md": "14px",
     "lg": "20px"
   },
+  "controls": {
+    "height": "40px",
+    "touchHeight": "44px"
+  },
   "spacing": {
     "1": "4px",
     "2": "8px",

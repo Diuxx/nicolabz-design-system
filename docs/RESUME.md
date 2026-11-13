@@ -18,6 +18,8 @@ component gallery.
   in the shared stylesheets.
 - `src/theme.js` applies the selected theme, tracks system preferences, and
   exposes `window.nicolabzTheme`.
+- `src/components.js` exposes optional dependency-free helpers for tabs,
+  toasts, tooltips, and dropdown disclosures; other components use native HTML.
 - `demo/index.html` and `demo/demo.css` organize the gallery. Templates provide
   both previews and copyable examples; `demo/demo.js` renders them and handles
   local interactions.

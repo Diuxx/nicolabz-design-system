@@ -34,6 +34,8 @@
   --space-8: 32px;
   --space-12: 48px;
   --space-16: 64px;
+  --control-height: 40px;
+  --control-touch-height: 44px;
 }
 :root[data-theme="dark"] {
   color-scheme: dark;

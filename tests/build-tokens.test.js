@@ -31,8 +31,11 @@ test("génère tous les tokens des deux thèmes de manière déterministe", () =
       }
     }
   }
-  for (const [prefix, values] of [["radius", palette.radii], ["space", palette.spacing]]) {
-    for (const [name, value] of Object.entries(values)) assert.ok(css.includes(`--${prefix}-${name}: ${value};`));
+  for (const [prefix, values] of [["radius", palette.radii], ["space", palette.spacing], ["control", palette.controls]]) {
+    for (const [name, value] of Object.entries(values)) {
+      const cssName = name.replace(/[A-Z]/g, (letter) => `-${letter.toLowerCase()}`);
+      assert.ok(css.includes(`--${prefix}-${cssName}: ${value};`));
+    }
   }
 });
 
@@ -44,6 +47,9 @@ test("rejette les valeurs manquantes, mal formées et les tokens inconnus", () =
     (p) => { p.themes.light.art.blur = "-2px"; },
     (p) => { p.radii.md = "14"; },
     (p) => { p.spacing["4"] = "-16px"; },
+    (p) => { p.controls.touchHeight = "30px"; },
+    (p) => { p.controls.height = "50px"; },
+    (p) => { delete p.controls.height; },
     (p) => { p.themes.light.extra = "#FFFFFF"; }
   ]) {
     const copy = structuredClone(palette);
