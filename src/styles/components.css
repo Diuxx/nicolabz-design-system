@@ -1,3 +1,5 @@
+@import url("./tables.css");
+
 .nz-button,
 .button {
   box-sizing: border-box;
@@ -566,10 +568,6 @@
 .nz-accordion summary { box-sizing: border-box; min-height: var(--control-height); padding: var(--space-2) var(--space-3); cursor: pointer; }
 .nz-accordion > div { padding: 0 var(--space-3) var(--space-3); }
 
-.nz-table-container { max-width: 100%; overflow-x: auto; }
-.nz-table { width: 100%; border-collapse: collapse; text-align: start; }
-.nz-table th, .nz-table td { padding: var(--space-2) var(--space-3); border-bottom: 1px solid var(--color-border); text-align: start; }
-.nz-table th { background: var(--color-surface-muted); }
 .nz-pagination { display: flex; flex-wrap: wrap; gap: var(--space-2); }
 .nz-pagination a[aria-current="page"] { background: var(--color-button); color: var(--color-button-text); }
 

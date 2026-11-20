@@ -7,33 +7,83 @@ const vm = require("node:vm");
 const root = path.resolve(__dirname, "..");
 const source = fs.readFileSync(path.join(root, "src", "components.js"), "utf8");
 const styles = fs.readFileSync(path.join(root, "src", "styles", "components.css"), "utf8");
+const tableStyles = fs.readFileSync(path.join(root, "src", "styles", "tables.css"), "utf8");
 const markup = fs.readFileSync(path.join(root, "demo", "index.html"), "utf8");
+const catalog = require("../tokens/components.json");
 
 class Element {
-  constructor(id = "") {
+  constructor(id = "", tagName = "DIV") {
     this.id = id;
+    this.tagName = tagName.toUpperCase();
     this.attributes = {};
     this.listeners = {};
     this.children = [];
     this.hidden = false;
     this.disabled = false;
     this.tabIndex = 0;
-    this.classList = { add: (...names) => { this.className = `${this.className || ""} ${names.join(" ")}`.trim(); } };
+    this.classes = new Set();
+    this.classList = {
+      add: (...names) => names.forEach((name) => this.classes.add(name)),
+      contains: (name) => this.classes.has(name),
+      toggle: (name, force) => {
+        const shouldAdd = force === undefined ? !this.classes.has(name) : force;
+        if (shouldAdd) this.classes.add(name);
+        else this.classes.delete(name);
+        return shouldAdd;
+      }
+    };
+    this.dataset = {};
+    this.value = "";
   }
+  get className() { return Array.from(this.classes).join(" "); }
+  set className(value) { this.classes = new Set(String(value).split(/\s+/).filter(Boolean)); }
+  get textContent() { return `${this._textContent || ""}${this.children.map((child) => child.textContent).join("")}`; }
+  set textContent(value) { this._textContent = String(value); }
+  hasAttribute(name) { return Object.prototype.hasOwnProperty.call(this.attributes, name); }
   setAttribute(name, value) { this.attributes[name] = value; }
   getAttribute(name) { return this.attributes[name] ?? null; }
+  removeAttribute(name) { delete this.attributes[name]; }
   addEventListener(name, callback) { this.listeners[name] = callback; }
   emit(name, event) { this.listeners[name](event); }
-  append(...children) { this.children.push(...children); for (const child of children) child.parent = this; }
+  append(...children) {
+    for (const child of children) {
+      if (child.parent) {
+        const index = child.parent.children.indexOf(child);
+        if (index >= 0) child.parent.children.splice(index, 1);
+      }
+      this.children.push(child);
+      child.parent = this;
+      child.parentElement = this;
+    }
+  }
+  insertBefore(child, reference) {
+    const index = this.children.indexOf(reference);
+    if (child.parent) {
+      const childIndex = child.parent.children.indexOf(child);
+      if (childIndex >= 0) child.parent.children.splice(childIndex, 1);
+    }
+    this.children.splice(index < 0 ? this.children.length : index, 0, child);
+    child.parent = this;
+    child.parentElement = this;
+  }
   contains(child) { return this.children.includes(child); }
   matches() { return false; }
-  remove() { this.parent.children = this.parent.children.filter((child) => child !== this); }
+  remove() {
+    const index = this.parent.children.indexOf(this);
+    if (index >= 0) this.parent.children.splice(index, 1);
+  }
   focus() { this.focused = true; }
   closest() { return this; }
 }
 
-function setup() {
-  const document = { createElement: () => new Element(), activeElement: null };
+function setup(configuredTables = []) {
+  const document = {
+    createElement: (tagName) => new Element("", tagName),
+    documentElement: { getAttribute: () => "fr" },
+    readyState: "complete",
+    querySelectorAll: () => configuredTables,
+    activeElement: null
+  };
   let scheduled;
   const window = {
     setTimeout: (callback, duration) => { scheduled = { callback, duration }; return 1; },
@@ -42,6 +92,42 @@ function setup() {
   };
   vm.runInNewContext(source, { window, document, CSS: { escape: (value) => value } });
   return { api: window.nicolabzComponents, document, getScheduled: () => scheduled };
+}
+
+function createTable({ sortable = false, filterable = false } = {}) {
+  const table = new Element("", "table");
+  table.classList.add("nz-table");
+  if (sortable) table.attributes["data-sortable"] = "";
+  if (filterable) table.attributes["data-filterable"] = "";
+  table.closest = () => null;
+  const headers = ["Project", "Hours"].map((label, index) => {
+    const header = new Element("", "th");
+    header.cellIndex = index;
+    header.textContent = label;
+    if (index === 1) header.dataset.sortType = "number";
+    return header;
+  });
+  const body = new Element("", "tbody");
+  body.rows = body.children;
+  const rows = [
+    ["Alpha", "12"],
+    ["Beta", "4"]
+  ].map((values) => {
+    const row = new Element("", "tr");
+    row.cells = values.map((value) => {
+      const cell = new Element("", "td");
+      cell.textContent = value;
+      return cell;
+    });
+    row.append(...row.cells);
+    return row;
+  });
+  body.append(...rows);
+  table.tBodies = [body];
+  table.querySelectorAll = () => headers;
+  const parent = new Element();
+  parent.append(table);
+  return { table, headers, body, rows, parent };
 }
 
 test("tabs select panels with keyboard navigation and skip disabled tabs", () => {
@@ -113,4 +199,53 @@ test("extended components use native semantics and reduced-motion styles", () =>
   assert.match(styles, /\.nz-dialog-actions\s*\{[^}]*justify-content:\s*flex-end/);
   assert.match(styles, /\.nz-spinner-sm\s*\{/);
   assert.match(styles, /\.nz-spinner-lg\s*\{/);
+});
+
+test("tables expose grouped compact rows and sticky headers without changing the default table", () => {
+  assert.match(styles, /@import url\("\.\/tables\.css"\)/);
+  assert.match(tableStyles, /\.nz-table-compact th, \.nz-table-compact td\s*\{[^}]*padding:/);
+  assert.match(tableStyles, /\.nz-table-sticky thead th\s*\{[^}]*position:\s*sticky/);
+  assert.match(tableStyles, /\.nz-table \.nz-table-align-end\s*\{[^}]*text-align:\s*end/);
+  assert.match(tableStyles, /\.nz-table \.nz-table-group > \*/);
+  assert.match(tableStyles, /\.nz-table-filter:focus-visible:enabled\s*\{[^}]*outline:\s*none;[^}]*box-shadow:\s*inset 0 0 0 1px var\(--color-accent\);/);
+  assert.match(markup, /class="nz-table nz-table-compact nz-table-sticky"/);
+  assert.match(markup, /class="nz-table-group"/);
+  const table = catalog.components.find((component) => component.name === "Table");
+  assert.equal(table.variants.compact, ".nz-table-compact");
+  assert.equal(table.variants.sticky, ".nz-table-sticky");
+});
+
+test("table sorting and filtering are opt-in and operate on rows", () => {
+  const { api } = setup();
+  const unchanged = createTable();
+  api.initializeTable(unchanged.table);
+  assert.equal(unchanged.parent.children.length, 1);
+  assert.equal(unchanged.headers[0].children.length, 0);
+
+  const interactive = createTable({ sortable: true, filterable: true });
+  api.initializeTable(interactive.table);
+  assert.equal(interactive.headers[1].children[0].getAttribute("aria-label"), "Trier par Hours");
+  interactive.headers[1].children[0].emit("click", {});
+  assert.deepEqual(interactive.body.rows.map((row) => row.cells[0].textContent), ["Beta", "Alpha"]);
+  assert.equal(interactive.headers[1].getAttribute("aria-sort"), "ascending");
+  interactive.headers[1].children[0].emit("click", {});
+  assert.deepEqual(interactive.body.rows.map((row) => row.cells[0].textContent), ["Alpha", "Beta"]);
+  assert.equal(interactive.headers[1].getAttribute("aria-sort"), "descending");
+
+  const controls = interactive.parent.children[0];
+  const filter = controls.children[0].children[0];
+  filter.value = "alpha";
+  filter.emit("input", {});
+  const rowsByName = new Map(interactive.body.rows.map((row) => [row.cells[0].textContent, row]));
+  assert.equal(rowsByName.get("Alpha").classList.contains("nz-table-filtered-out"), false);
+  assert.equal(rowsByName.get("Beta").classList.contains("nz-table-filtered-out"), true);
+  assert.equal(controls.children[1].textContent, "1 résultat");
+});
+
+test("tables with opt-in attributes initialize automatically and only once", () => {
+  const configured = createTable({ filterable: true });
+  const { api } = setup([configured.table]);
+  assert.equal(configured.parent.children.length, 2);
+  api.initializeTable(configured.table);
+  assert.equal(configured.parent.children.length, 2);
 });

@@ -161,5 +161,155 @@
     });
   }
 
-  global.nicolabzComponents = { initializeTabs, initializeTooltip, initializeDropdown, showToast };
+  function getTableRowGroups(rows) {
+    const groups = [];
+    for (const row of rows) {
+      if (row.classList.contains("nz-table-group")) groups.push([row]);
+      else if (groups.length) groups[groups.length - 1].push(row);
+      else groups.push([row]);
+    }
+    return groups;
+  }
+
+  function initializeTable(table) {
+    if (!table || table.tagName !== "TABLE" || !table.classList.contains("nz-table")) {
+      throw new Error("Table initialization requires a .nz-table element.");
+    }
+    if (initializedTables.has(table)) return;
+
+    const sortable = table.hasAttribute("data-sortable");
+    const filterable = table.hasAttribute("data-filterable");
+    if (!sortable && !filterable) return;
+    if (!table.tBodies.length) throw new Error("An interactive table requires at least one tbody.");
+    if (filterable && !table.parentElement) throw new Error("A filterable table requires a parent container.");
+
+    const localeElement = table.closest("[lang]") || document.documentElement;
+    const locale = localeElement.getAttribute("lang") || "en";
+    const isFrench = locale.toLowerCase().startsWith("fr");
+
+    if (sortable) {
+      const headers = Array.from(table.querySelectorAll("thead th[scope='col']"));
+      if (!headers.length) throw new Error("A sortable table requires column headers with scope=\"col\".");
+      const collator = new Intl.Collator(locale, { numeric: true, sensitivity: "base" });
+      let sortedHeader = null;
+      let sortDirection = 1;
+      const sortButtons = new Map();
+
+      function getValue(row, columnIndex) {
+        return row.cells[columnIndex] ? row.cells[columnIndex].textContent.trim() : "";
+      }
+
+      function compareRows(left, right, columnIndex, header, direction) {
+        const leftValue = getValue(left, columnIndex);
+        const rightValue = getValue(right, columnIndex);
+        if (!leftValue) return rightValue ? 1 : 0;
+        if (!rightValue) return -1;
+
+        if (header.dataset.sortType === "number") {
+          const leftNumber = Number(leftValue);
+          const rightNumber = Number(rightValue);
+          if (Number.isFinite(leftNumber) && Number.isFinite(rightNumber)) return (leftNumber - rightNumber) * direction;
+        }
+        return collator.compare(leftValue, rightValue) * direction;
+      }
+
+      function sortBy(header, button) {
+        sortDirection = sortedHeader === header ? -sortDirection : 1;
+        sortedHeader = header;
+        for (const item of headers) {
+          item.removeAttribute("aria-sort");
+          sortButtons.get(item).textContent = "↕";
+        }
+        header.setAttribute("aria-sort", sortDirection === 1 ? "ascending" : "descending");
+        button.textContent = sortDirection === 1 ? "↑" : "↓";
+
+        for (const body of table.tBodies) {
+          const groups = getTableRowGroups(Array.from(body.rows));
+          for (const group of groups) {
+            const hasGroupHeader = group[0].classList.contains("nz-table-group");
+            const firstDataRow = hasGroupHeader ? 1 : 0;
+            const sortedRows = group.slice(firstDataRow).map((row, index) => ({ row, index }));
+            sortedRows.sort((left, right) => {
+              const comparison = compareRows(left.row, right.row, header.cellIndex, header, sortDirection);
+              return comparison === 0 ? left.index - right.index : comparison;
+            });
+            group.splice(firstDataRow, sortedRows.length, ...sortedRows.map(({ row }) => row));
+          }
+          for (const row of groups.flat()) body.append(row);
+        }
+      }
+
+      for (const header of headers) {
+        const label = header.textContent.trim();
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "nz-table-sort";
+        button.textContent = "↕";
+        button.setAttribute("aria-label", `${isFrench ? "Trier par" : "Sort by"} ${label}`);
+        button.addEventListener("click", () => sortBy(header, button));
+        header.append(button);
+        sortButtons.set(header, button);
+      }
+    }
+
+    if (filterable) {
+      const parent = table.parentElement;
+      const controls = document.createElement("div");
+      controls.className = "nz-table-controls";
+      const label = document.createElement("label");
+      label.className = "nz-table-filter-label";
+      label.textContent = isFrench ? "Filtrer les lignes" : "Filter rows";
+      const input = document.createElement("input");
+      input.type = "search";
+      input.className = "nz-table-filter";
+      label.append(input);
+      const status = document.createElement("span");
+      status.className = "nz-table-filter-status";
+      status.setAttribute("role", "status");
+      status.setAttribute("aria-live", "polite");
+      controls.append(label, status);
+      parent.insertBefore(controls, table);
+
+      input.addEventListener("input", () => {
+        const query = input.value.trim().toLocaleLowerCase(locale);
+        let matchingRows = 0;
+        for (const body of table.tBodies) {
+          for (const group of getTableRowGroups(Array.from(body.rows))) {
+            const hasGroupHeader = group[0].classList.contains("nz-table-group");
+            const firstDataRow = hasGroupHeader ? 1 : 0;
+            const dataRows = group.slice(firstDataRow);
+            let groupHasMatch = false;
+            for (const row of dataRows) {
+              const matches = !query || row.textContent.toLocaleLowerCase(locale).includes(query);
+              row.classList.toggle("nz-table-filtered-out", !matches);
+              if (matches) {
+                matchingRows += 1;
+                groupHasMatch = true;
+              }
+            }
+            if (hasGroupHeader) group[0].classList.toggle("nz-table-filtered-out", Boolean(query) && !groupHasMatch);
+          }
+        }
+        status.textContent = query
+          ? isFrench ? `${matchingRows} résultat${matchingRows === 1 ? "" : "s"}` : `${matchingRows} result${matchingRows === 1 ? "" : "s"}`
+          : "";
+      });
+    }
+    initializedTables.add(table);
+  }
+
+  const initializedTables = new WeakSet();
+
+  function initializeOptInTables() {
+    for (const table of document.querySelectorAll("table.nz-table[data-sortable], table.nz-table[data-filterable]")) {
+      initializeTable(table);
+    }
+  }
+
+  global.nicolabzComponents = { initializeTabs, initializeTooltip, initializeDropdown, initializeTable, showToast };
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initializeOptInTables, { once: true });
+  } else {
+    initializeOptInTables();
+  }
 })(window);

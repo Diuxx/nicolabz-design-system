@@ -67,6 +67,9 @@
   initializeExamples();
   const toastRegion = document.querySelector("[data-toast-region]");
   document.body.append(toastRegion);
+  for (const table of document.querySelectorAll("table.nz-table[data-sortable], table.nz-table[data-filterable]")) {
+    window.nicolabzComponents.initializeTable(table);
+  }
   for (const tabs of document.querySelectorAll("[data-tabs]")) window.nicolabzComponents.initializeTabs(tabs);
   for (const tooltip of document.querySelectorAll("[data-tooltip]")) window.nicolabzComponents.initializeTooltip(tooltip);
   for (const dropdown of document.querySelectorAll("[data-dropdown]")) window.nicolabzComponents.initializeDropdown(dropdown);

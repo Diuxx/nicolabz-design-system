@@ -13,6 +13,7 @@
   "exports": {
     "./theme.css": "./src/styles/theme.css",
     "./components.css": "./src/styles/components.css",
+    "./tables.css": "./src/styles/tables.css",
     "./typography.css": "./src/styles/typography.css",
     "./decorations.css": "./src/styles/decorations.css",
     "./icons.css": "./src/styles/icons.css",

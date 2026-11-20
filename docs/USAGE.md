@@ -15,7 +15,7 @@ npm install "github:Diuxx/nicolabz-design-system#REF"
 ```
 
 Replace `REF` with a verified tag or commit SHA. The package exports
-`theme.css`, `components.css`, `typography.css`, `decorations.css`, `icons.css`,
+`theme.css`, `components.css`, `tables.css`, `typography.css`, `decorations.css`, `icons.css`,
 `icons.svg`, `theme.js`, and `components.js`.
 
 ## CSS and Theme
@@ -180,10 +180,40 @@ Selecting an enabled action also closes the disclosure.
 ### Tables, pagination and tooltips
 
 Wrap a `.nz-table` in a focusable `.nz-table-container` with `role="region"` and
-an accessible label for keyboard scrolling, use a `caption`, and identify
-header cells with `scope`. Use `.nz-pagination` on a
+an accessible label for keyboard scrolling, name the table with a `caption`
+or `aria-label`, and identify
+header cells with `scope`. Add `.nz-table-compact` for denser rows and
+`.nz-table-sticky` to keep column headings visible when the container has a
+constrained height. Use `.nz-table-align-end` on numeric cells and
+`.nz-table-group` on group rows. Table styles are included by `components.css`;
+`tables.css` is also available separately when only tables are needed.
+Applications decide the container's height and column widths.
+Use `.nz-pagination` on a
 labelled `<nav>`, links for actual page URLs, and `aria-current="page"` for the
 current page. Applications are responsible for fetching and rendering data.
+
+Sorting and filtering are opt-in. Add `data-sortable` to enable buttons on
+column headers, and/or `data-filterable` to add a labelled search field that
+matches text across the table's rows. `components.js` automatically initializes
+opted-in tables already in the document when it loads:
+
+```html
+<table id="projects" class="nz-table" data-sortable data-filterable>
+  <thead>
+    <tr><th scope="col">Project</th><th scope="col" data-sort-type="number">Hours</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Design system</td><td>12</td></tr>
+    <tr><td>Documentation</td><td>4</td></tr>
+  </tbody>
+</table>
+```
+
+Sorting uses a locale-aware comparison by default; add
+`data-sort-type="number"` to a `scope="col"` header when its cells contain
+plain numbers. If neither opt-in attribute is present, the table is unchanged.
+For tables added after `components.js` has initialized, call
+`window.nicolabzComponents.initializeTable(table)` after inserting them.
 
 For a tooltip, use a focusable trigger with `aria-describedby` referencing a
 unique `.nz-tooltip-text` element with `role="tooltip"`, inside `.nz-tooltip`.

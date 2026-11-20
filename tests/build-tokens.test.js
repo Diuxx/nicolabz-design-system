@@ -8,6 +8,7 @@ const { generate } = require("../scripts/build-tokens.js");
 const palette = require("../tokens/palette.json");
 const componentCatalog = require("../tokens/components.json");
 const componentStyles = fs.readFileSync(path.join(__dirname, "..", "src", "styles", "components.css"), "utf8");
+const tableStyles = fs.readFileSync(path.join(__dirname, "..", "src", "styles", "tables.css"), "utf8");
 const iconStyles = fs.readFileSync(path.join(__dirname, "..", "src", "styles", "icons.css"), "utf8");
 const baseStyles = fs.readFileSync(path.join(__dirname, "..", "src", "styles", "typography.css"), "utf8");
 const demoMarkup = fs.readFileSync(path.join(__dirname, "..", "demo", "index.html"), "utf8");
@@ -59,7 +60,7 @@ test("rejette les valeurs manquantes, mal formées et les tokens inconnus", () =
 });
 
 test("le catalogue décrit les composants CSS effectivement présentés dans la démo", () => {
-  const componentStylesheets = `${componentStyles}\n${iconStyles}`;
+  const componentStylesheets = `${componentStyles}\n${tableStyles}\n${iconStyles}`;
   const selectors = Array.from(componentStylesheets.matchAll(/([^{}]+)\{/g))
     .flatMap((match) => match[1].split(",").map((selector) => selector.trim()));
   const allStyles = `${componentStylesheets}\n${baseStyles}`;
@@ -75,7 +76,7 @@ test("le catalogue décrit les composants CSS effectivement présentés dans la 
     );
     assert.ok(demoClasses.has(component.selector.slice(1)), `${component.selector} doit être présenté dans la démo`);
     for (const variantSelector of Object.values(component.variants || {})) {
-      assert.ok(selectors.includes(variantSelector), `${variantSelector} doit être défini en CSS`);
+      assert.ok(selectors.includes(variantSelector) || selectors.some((selector) => selector.startsWith(`${variantSelector} `)), `${variantSelector} doit être défini en CSS`);
       assert.ok(demoClasses.has(variantSelector.slice(1)), `${variantSelector} doit être présenté dans la démo`);
     }
     for (const elementSelector of Object.values(component.elements || {})) {

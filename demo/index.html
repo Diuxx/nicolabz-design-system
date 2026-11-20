@@ -42,6 +42,7 @@
             <li><a href="#containers">Conteneurs</a></li>
             <li><a href="#indicators">Indicateurs</a></li>
             <li><a href="#navigation">Navigation</a></li>
+            <li><a href="#tables">Tableau</a></li>
             <li><a href="#extended-components">Composants complémentaires</a></li>
           </ul>
           <p class="sidebar-heading">RESSOURCES</p>
@@ -309,6 +310,32 @@
                 </div>
               </template>
             </article>
+            <article id="tables" class="story-card nz-panel" data-story="tables" aria-labelledby="tables-title">
+              <div class="story-heading">
+                <div><h3 id="tables-title">Tableau</h3><p>Présentation de données structurées avec défilement accessible et en-têtes explicites.</p></div>
+                <code class="selector-chip">.nz-table</code>
+              </div>
+              <div class="story-preview story-preview-form" data-preview="tables" aria-label="Aperçu du tableau"></div>
+              <p class="state-note"><strong>Options</strong> Tri et filtre activés ici à la demande ; compact · En-tête fixe · Alignement numérique · Lignes de groupe</p>
+              <details class="code-details">
+                <summary>Exemple HTML</summary>
+                <div class="code-toolbar"><button class="nz-button nz-button-secondary copy-button" type="button" data-copy>Copier le code</button><span data-copy-status aria-live="polite"></span></div>
+                <pre><code data-code></code></pre>
+              </details>
+              <template data-example="tables">
+                <div class="nz-table-container" role="region" aria-label="Projets récents" tabindex="0">
+                  <table class="nz-table" data-sortable data-filterable>
+                    <caption>Projets récents</caption>
+                    <thead><tr><th scope="col">Projet</th><th scope="col">Statut</th><th scope="col">Responsable</th></tr></thead>
+                    <tbody>
+                      <tr><td>Design system</td><td>Actif</td><td>Camille</td></tr>
+                      <tr><td>Documentation</td><td>En cours</td><td>Alex</td></tr>
+                      <tr><td>Site web</td><td>Planifié</td><td>Sam</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </template>
+            </article>
             <article class="story-card nz-panel" data-story="advanced" aria-labelledby="advanced-title">
               <div class="story-heading"><div><h3 id="advanced-title">Navigation et contenu</h3><p>Onglets, accordéon, tableau et actions contextuelles.</p></div></div>
               <div class="story-preview story-preview-form" data-preview="advanced" aria-label="Composants avancés"></div>
@@ -334,6 +361,19 @@
                     <caption>Projets récents</caption>
                     <thead><tr><th scope="col">Projet</th><th scope="col">Statut</th></tr></thead>
                     <tbody><tr data-page="1"><td>Design system</td><td>Actif</td></tr><tr data-page="2" hidden><td>Documentation</td><td>En cours</td></tr></tbody>
+                  </table>
+                </div>
+                <div class="nz-table-container" role="region" aria-label="Suivi des tâches" tabindex="0" style="max-height: 12rem">
+                  <table class="nz-table nz-table-compact nz-table-sticky">
+                    <caption>Suivi des tâches</caption>
+                    <thead><tr><th scope="col">Équipe</th><th scope="col">Tâche</th><th scope="col" class="nz-table-align-end">Heures</th></tr></thead>
+                    <tbody>
+                      <tr class="nz-table-group"><th scope="rowgroup" colspan="2">Équipe produit</th><td class="nz-table-align-end">18</td></tr>
+                      <tr><td>Produit</td><td>Conception</td><td class="nz-table-align-end">10</td></tr>
+                      <tr><td>Produit</td><td>Tests</td><td class="nz-table-align-end">8</td></tr>
+                      <tr class="nz-table-group"><th scope="rowgroup" colspan="2">Équipe technique</th><td class="nz-table-align-end">14</td></tr>
+                      <tr><td>Technique</td><td>Développement</td><td class="nz-table-align-end">14</td></tr>
+                    </tbody>
                   </table>
                 </div>
                 <nav class="nz-pagination" aria-label="Pagination">

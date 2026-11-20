@@ -64,9 +64,27 @@ Deliver the simplest correct, secure, and maintainable solution.
 
 Optimize for human understanding, not code brevity or sophistication.
 
+## Deployment
+
+- Keep deployment scripts in `ops/`.
+- Include a short deployment note in `README.md` and detailed, verified
+  deployment instructions in `docs/USAGE.md`.
+
 ## Documentation
 
 All project documentation MUST be written in **English**.
+
+The expected project documentation consists of:
+
+- `AGENTS.md` and `README.md` at the project root.
+- `docs/PROJECT.md`, `docs/RESUME.md`, and `docs/USAGE.md` in `docs/`.
+
+If a required file is missing, create it and initialize it with verified information
+from the project. Do not invent features, commands, or architectural decisions.
+If other project Markdown files exist or the layout otherwise differs from this
+structure, ask the user whether to update it before reorganizing, merging, moving,
+or deleting existing files. Creating a missing required file does not require
+permission.
 
 ### README.md
 
@@ -103,6 +121,8 @@ Keep detailed technical documentation in `docs/USAGE.md`, including when applica
 - Document only implemented features and verified commands.
 - Keep documentation synchronized with actual project behavior.
 - Use clear headings, simple language, and executable examples.
+- When documenting architecture, prefer concise ASCII diagrams in fenced code blocks
+  when they make components, structure, or data flows easier to understand.
 - Create or update `docs/USAGE.md` when technical instructions change.
 - Omit irrelevant sections rather than adding empty placeholders.
 
@@ -112,14 +132,17 @@ Markdown files (`*.md`) are read-only by default.
 
 ### Allowed Modifications
 
-Only the following files may be updated without explicit permission:
+The following files may be created or updated without explicit permission:
 
 - `README.md` — Keep the project description, technologies, setup, execution, and testing commands accurate.
 - `docs/RESUME.md` — Maintain a concise technical summary of the project's architecture for future development sessions.
+- `docs/USAGE.md` — Maintain detailed, verified usage and development instructions.
+
+Create `AGENTS.md` or `docs/PROJECT.md` when missing, based on verified project
+information. Once they exist, treat them as read-only unless the user explicitly
+requests changes.
 
 ### Architecture Summary
-
-`docs/RESUME.md` may be empty at project initialization.
 
 As the project evolves, maintain a concise summary containing:
 

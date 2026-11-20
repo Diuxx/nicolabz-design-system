@@ -16,6 +16,8 @@ component gallery.
   sprite and load `src/styles/icons.css`.
 - `tokens/components.json` catalogs public components and variants implemented
   in the shared stylesheets.
+- `src/styles/tables.css` provides table styles separately and is imported by
+  `components.css` for the complete component bundle.
 - `src/theme.js` applies the selected theme, tracks system preferences, and
   exposes `window.nicolabzTheme`.
 - `src/components.js` exposes optional dependency-free helpers for tabs,

@@ -193,10 +193,14 @@
     },
     {
       "name": "Table",
-      "description": "Structured data with horizontal overflow on small screens.",
+      "description": "Structured data with keyboard-accessible scrolling and opt-in sorting and filtering.",
       "selector": ".nz-table",
-      "variants": {},
-      "states": []
+      "variants": {
+        "compact": ".nz-table-compact",
+        "sticky": ".nz-table-sticky"
+      },
+      "states": [],
+      "usage": "Wrap in a named, focusable .nz-table-container. Name the table with a caption or aria-label and use scoped headers. Add data-sortable and/or data-filterable to opt in; components.js initializes these tables automatically. Call initializeTable(table) for dynamically inserted tables. Combine .nz-table with .nz-table-compact or .nz-table-sticky as needed. Use data-sort-type=\"number\" on a column header for numeric sorting, .nz-table-align-end on numeric cells and .nz-table-group on group rows."
     },
     {
       "name": "Pagination",

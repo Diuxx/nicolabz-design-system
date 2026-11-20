@@ -1,0 +1,33 @@
+.nz-table-container { max-width: 100%; overflow: auto; }
+.nz-table-container:focus-visible { outline: 2px solid var(--color-focus); outline-offset: -2px; }
+.nz-table-controls { display: flex; flex-wrap: wrap; align-items: end; gap: var(--space-3); margin-block-end: var(--space-3); }
+.nz-table-filter-label { display: grid; gap: var(--space-1); width: min(100%, 22rem); color: var(--color-text-secondary); font-size: 12px; }
+.nz-table-filter {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: var(--control-height);
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-control-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-background);
+  color: var(--color-text);
+  font: inherit;
+}
+.nz-table-filter:focus:enabled { border-color: var(--color-accent); }
+.nz-table-filter:focus-visible:enabled { outline: none; box-shadow: inset 0 0 0 1px var(--color-accent); }
+.nz-table-sort:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.nz-table-filter-status { color: var(--color-text-secondary); font-size: 12px; }
+.nz-table { width: 100%; border-collapse: collapse; text-align: start; }
+.nz-table th, .nz-table td { padding: var(--space-2) var(--space-3); border-bottom: 1px solid var(--color-border); text-align: start; }
+.nz-table th { background: var(--color-surface-muted); }
+.nz-table-sort { min-width: var(--control-height); min-height: var(--control-height); margin-inline-start: var(--space-2); padding: 0; border: 0; border-radius: var(--radius-sm); background: transparent; color: inherit; font: inherit; cursor: pointer; }
+.nz-table-sort:hover { background: var(--color-surface); }
+.nz-table tbody tr.nz-table-filtered-out { display: none; }
+.nz-table-compact th, .nz-table-compact td { padding: var(--space-1) var(--space-2); }
+.nz-table-sticky thead th { position: sticky; top: 0; z-index: 1; }
+.nz-table .nz-table-align-end { text-align: end; font-variant-numeric: tabular-nums; }
+.nz-table .nz-table-group > * { background: var(--color-surface-muted); font-weight: 700; }
+
+@media (pointer: coarse) {
+  .nz-table-sort { min-width: var(--control-touch-height); min-height: var(--control-touch-height); }
+}
